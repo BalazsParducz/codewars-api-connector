@@ -10,7 +10,7 @@
           integrity="sha384-S7YMK1xjUjSpEnF4P8hPUcgjXYLZKK3fQW1j5ObLSl787II9p8RO9XUGehRmKsxd" crossorigin="anonymous"/>
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
           integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous"/>
-    <link rel="stylesheet" href="static/basic.css"/>
+    <link rel="stylesheet" href="basic.css"/>
 </head>
 <body>
     <div class="stuff">
@@ -19,10 +19,8 @@
         <h1 th:text="'Clan he is serving: '+ ${clan}">Klán</h1>
         <h1 th:text="'Number of completed challenges: '+ ${completedChallenges}">Completed challenges</h1>
         <h1 th:text="'Kata resolved: '+ ${nameOfKata}">Pages</h1>
+        <h1 th:text="'Time of submission: ' + ${#dates.format(timeOfCompletion, 'yyyy. MMMMMMMMM dd, HH:mm:ss')}">Date1</h1>
 
-        <!--<p>-->
-            <!--Today is: <span th:text="${#calendars.format(today,'dd MMMM yyyy')}">13 May 2011</span>-->
-        <!--</p>-->
     </div>
 
 </body>
