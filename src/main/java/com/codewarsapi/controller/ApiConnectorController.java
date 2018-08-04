@@ -1,6 +1,7 @@
 package com.codewarsapi.controller;
 
 import org.json.JSONObject;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,34 +11,56 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 @Controller
 public class ApiConnectorController {
 
-    private final String mainAPI = "https://www.codewars.com/api/v1/users/Balazs_Parducz";
-    private final String katas = "https://www.codewars.com/api/v1/users/Balazs_Parducz/code-challenges/completed?page=0";
+    private final String mainAPI = apiOf("Balazs_Parducz");
+    private final String katas = apiOfCompletedChallengesFor("Balazs_Parducz");
+    private final int pageOfRecentKatas = 0;
 
     @GetMapping(value = "/")
     public String indexPage(Model model) {
         try {
-            JSONObject jsonFromMainAPI = getJSON(mainAPI);// 10) JSON-ná alakítás
-            String userName = jsonFromMainAPI.getString("username");         // 11) a username érték kiemelése változóba
+            JSONObject jsonFromMainAPI = getJSON(mainAPI);
+            String userName = jsonFromMainAPI.getString("username");
             String clan = jsonFromMainAPI.getString("clan");
             int completedChallenges = jsonFromMainAPI.getJSONObject("codeChallenges").getInt("totalCompleted");
 
             JSONObject jsonFromDetails = getJSON(katas);
-            String nameOfKata = jsonFromDetails.getJSONArray("data").getJSONObject(6).get("name").toString();
+            String nameOfKata = jsonFromDetails.getJSONArray("data").getJSONObject(pageOfRecentKatas).get("name").toString();
+            String date = jsonFromDetails.getJSONArray("data").getJSONObject(pageOfRecentKatas).get("completedAt").toString();
+            SimpleDateFormat hungarianDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
+            Date timeOfCompletion = hungarianDateFormat.parse(date);
 
             model.addAttribute("username", userName);
             model.addAttribute("clan", clan);
             model.addAttribute("completedChallenges", completedChallenges);
 
             model.addAttribute("nameOfKata", nameOfKata);
+            model.addAttribute("timeOfCompletion", timeOfCompletion);
         } catch (IOException e) {
             model.addAttribute("error", "Unable to connect to Codewars' API.");        // log error
+        } catch (ParseException e) {
+            // TODO log new error
+            model.addAttribute("error", "Unable to parse date.");        // log error
+
         }
+
         return "index";
     }
+
+    private String apiOfCompletedChallengesFor(String username) {
+        return "https://www.codewars.com/api/v1/users/"+ username + "/code-challenges/completed?page=0";
+    }
+
+    private String apiOf(String username) {
+        return "https://www.codewars.com/api/v1/users/" + username;
+     }
 
 
     private JSONObject getJSON(String urlString) throws IOException {
