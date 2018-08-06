@@ -15,12 +15,41 @@
 <body>
     <div class="stuff">
         <h3 th:text="${error}">This is en error message</h3>
-        <h1 th:text="'Username: ' + ${username}"></h1>
-        <h1 th:text="'Clan he is serving: '+ ${clan}">Klán</h1>
-        <h1 th:text="'Number of completed challenges: '+ ${completedChallenges}">Completed challenges</h1>
-        <h1 th:text="'Kata resolved: '+ ${nameOfKata}">Pages</h1>
-        <h1 th:text="'Time of submission: ' + ${#dates.format(timeOfCompletion, 'yyyy. MMMMMMMMM dd, HH:mm:ss')}">Date1</h1>
+        <table>
+            <tr>
+                <td><h1>Username</h1></td>
+                <td><h1 th:text="${username}"></h1></td>
+            </tr>
+            <tr>
+                <td><h3>Last kata resolved</h3></td>
+                <td><h3 th:text="${nameOfKata}"></h3></td>
+            </tr>
+            <tr>
+                <td><h3>Time of submission</h3></td>
+                <td><h3 th:text="${#dates.format(timeOfCompletion, 'yyyy. MMMMMMMMM dd., HH:mm:ss')}">Klán</h3></td>
+            </tr>
+            <tr>
+                <td><h3>User's clan</h3></td>
+                <td><h3 th:text="${clan}"></h3></td>
+            </tr>
+            <tr>
+                <td><h3>Number of completed challenges</h3></td>
+                <td><h3 th:text="${completedChallenges}"></h3></td>
+            </tr>
+        </table>
 
+        <table>
+            <tr>
+                <th>Kata</th>
+                <th>Language(s)</th>
+                <th>Completed at</th>
+            </tr>
+            <tr th:each="kata : ${allKatas}">
+                <td th:text="${kata['name']}">Name of kata</td>
+                <td th:text="${kata['completedLanguages']}">Languages</td>
+                <td th:text="${kata['completedAt']}">Submission time</td>
+            </tr>
+        </table>
     </div>
 
 </body>

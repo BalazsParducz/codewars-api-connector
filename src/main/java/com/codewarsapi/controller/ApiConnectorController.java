@@ -1,7 +1,8 @@
 package com.codewarsapi.controller;
 
+import com.codewarsapi.service.ApiService;
+import org.json.JSONArray;
 import org.json.JSONObject;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,20 +14,22 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
-import java.util.Locale;
+import java.util.List;
 
 @Controller
 public class ApiConnectorController {
 
-    private final String mainAPI = apiOf("Balazs_Parducz");
-    private final String katas = apiOfCompletedChallengesFor("Balazs_Parducz");
+    public ApiService apiService = new ApiService();
+    private final String api = apiService.apiOf("Balazs_Parducz");
+    private final String katas = apiService.apiOfCompletedChallengesFor("Balazs_Parducz");
     private final int pageOfRecentKatas = 0;
 
     @GetMapping(value = "/")
     public String indexPage(Model model) {
         try {
-            JSONObject jsonFromMainAPI = getJSON(mainAPI);
+            JSONObject jsonFromMainAPI = getJSON(api);
             String userName = jsonFromMainAPI.getString("username");
             String clan = jsonFromMainAPI.getString("clan");
             int completedChallenges = jsonFromMainAPI.getJSONObject("codeChallenges").getInt("totalCompleted");
@@ -37,12 +40,15 @@ public class ApiConnectorController {
             SimpleDateFormat hungarianDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
             Date timeOfCompletion = hungarianDateFormat.parse(date);
 
+            List allKatas = getArrayOfKatas().toList();
+
             model.addAttribute("username", userName);
             model.addAttribute("clan", clan);
             model.addAttribute("completedChallenges", completedChallenges);
 
             model.addAttribute("nameOfKata", nameOfKata);
             model.addAttribute("timeOfCompletion", timeOfCompletion);
+            model.addAttribute("allKatas", allKatas);
         } catch (IOException e) {
             model.addAttribute("error", "Unable to connect to Codewars' API.");        // log error
         } catch (ParseException e) {
@@ -54,13 +60,10 @@ public class ApiConnectorController {
         return "index";
     }
 
-    private String apiOfCompletedChallengesFor(String username) {
-        return "https://www.codewars.com/api/v1/users/"+ username + "/code-challenges/completed?page=0";
+    private JSONArray getArrayOfKatas() throws IOException {
+        JSONObject jsonFromDetails = getJSON(katas);
+        return jsonFromDetails.getJSONArray("data");
     }
-
-    private String apiOf(String username) {
-        return "https://www.codewars.com/api/v1/users/" + username;
-     }
 
 
     private JSONObject getJSON(String urlString) throws IOException {
