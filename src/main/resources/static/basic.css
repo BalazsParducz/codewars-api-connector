@@ -11,9 +11,14 @@ body {
     background-image: url("https://www.google.com/url?sa=i&rct=j&q=&esrc=s&source=images&cd=&cad=rja&uact=8&ved=2ahUKEwiWvODtqM_cAhVMIMUKHSeWDGQQjRx6BAgBEAU&url=http%3A%2F%2Fwww.oldbasingkarate.com%2FRESOURCES%2Fresources.html&psig=AOvVaw39Vmp-RLCAhdVkRwIBb9Bn&ust=1533331830946747");
 }
 
-td {
+td th {
     padding-top: 6px;
-    padding-right: 6px;
-    padding-left: 6px;
+    padding-right: 10px;
+    padding-left: 10px;
     padding-bottom: 6px;
+}
+
+.stuff.logo {
+    height: 42px;
+    width: 42px;
 }

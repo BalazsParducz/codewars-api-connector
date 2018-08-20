@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:d="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8"/>
     <title th:text="'Balázs\'s Codewars info.'">Default title</title>
@@ -13,44 +13,51 @@
     <link rel="stylesheet" href="basic.css"/>
 </head>
 <body>
-    <div class="stuff">
-        <h3 th:text="${error}">This is en error message</h3>
-        <table>
-            <tr>
-                <td><h1>Username</h1></td>
-                <td><h1 th:text="${username}"></h1></td>
-            </tr>
-            <tr>
-                <td><h3>Last kata resolved</h3></td>
-                <td><h3 th:text="${nameOfKata}"></h3></td>
-            </tr>
-            <tr>
-                <td><h3>Time of submission</h3></td>
-                <td><h3 th:text="${#dates.format(timeOfCompletion, 'yyyy. MMMMMMMMM dd., HH:mm:ss')}">Klán</h3></td>
-            </tr>
-            <tr>
-                <td><h3>User's clan</h3></td>
-                <td><h3 th:text="${clan}"></h3></td>
-            </tr>
-            <tr>
-                <td><h3>Number of completed challenges</h3></td>
-                <td><h3 th:text="${completedChallenges}"></h3></td>
-            </tr>
-        </table>
+<h3 th:text="${error}">This is en error message</h3>
 
-        <table>
-            <tr>
-                <th>Kata</th>
-                <th>Language(s)</th>
-                <th>Completed at</th>
-            </tr>
-            <tr th:each="kata : ${allKatas}">
-                <td th:text="${kata['name']}">Name of kata</td>
-                <td th:text="${kata['completedLanguages']}">Languages</td>
-                <td th:text="${kata['completedAt']}">Submission time</td>
-            </tr>
-        </table>
-    </div>
+<div class="stuff">
+
+
+    <!--<img src="https://egyprogramozo.eu/wp-content/uploads/2016/11/codewars.png" alt="Codewars logo">-->
+
+
+    <table>
+        <tr>
+            <td><h1>Username</h1></td>
+            <td><h1 th:text="${username}"></h1></td>
+        </tr>
+        <tr>
+            <td><h3>Last kata resolved</h3></td>
+            <td><h3 th:text="${nameOfKata}"></h3></td>
+        </tr>
+        <tr>
+            <td><h3>Time of submission</h3></td>
+            <td><h3 th:text="${#dates.format(timeOfCompletion, 'yyyy. MMMMMMMMM dd., HH:mm:ss')}">Klán</h3></td>
+        </tr>
+        <tr>
+            <td><h3>User's clan</h3></td>
+            <td><h3 th:text="${clan}"></h3></td>
+        </tr>
+        <tr>
+            <td><h3>Number of completed challenges</h3></td>
+            <td><h3 th:text="${completedChallenges}"></h3></td>
+        </tr>
+    </table>
+
+    <table>
+        <tr>
+            <th>Kata</th>
+            <th>Language(s)</th>
+            <th>Completed at</th>
+        </tr>
+        <tr th:each="kata : ${allKatas}">
+            <td th:text="${kata['name']}">Name of kata</td>
+            <td th:text="${kata['completedLanguages']}">Languages</td>
+            <td th:text="${kata['completedAt']}">Submission time</td>
+        </tr>
+    </table>
+</div>
+
 
 </body>
 </html>
