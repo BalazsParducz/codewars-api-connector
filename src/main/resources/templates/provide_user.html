@@ -13,16 +13,20 @@
 </head>
 <body>
 
+
     <div class="plate">
-        <form th:action="/getAPI" method="post">
-            <div>
-                <label for="codewars_user">Codecooler's Codewars username:</label>
-                <input type="text" id="codewars_user" name="codewars_user" placeholder="Codewars username"/>
+        <form th:action="@{/getAPI}" th:object="${codewars_user}" method="post">
+            <div id="label">
+                <h1><label for="codewars_user">Codecooler's Codewars username:</label></h1>
             </div>
-            <div>
-                <input type="submit" />
+            <div id="textfield">
+                <input type="text" id="codewars_user" name="codewars_user" placeholder="Codewars username" required="true"/>
+            </div>
+            <div id="codewars_button">
+                <button type="submit"><img src="codewars_button.jpeg"/></button>
             </div>
         </form>
+        <h1 th:text="${errormsg}"></h1>
     </div>
 
 </body>

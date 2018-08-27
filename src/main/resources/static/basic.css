@@ -1,14 +1,13 @@
+
+
 div.stuff {
-    position: absolute;
+    position: relative;
     top: 25px;
-    left: 30px;
+    left: 15%;
+    width: fit-content;
     border: 3px solid #73AD21;
     padding: 50px;
     background-color: #222222;
-}
-
-body {
-    background-image: url("https://www.google.com/url?sa=i&rct=j&q=&esrc=s&source=images&cd=&cad=rja&uact=8&ved=2ahUKEwiWvODtqM_cAhVMIMUKHSeWDGQQjRx6BAgBEAU&url=http%3A%2F%2Fwww.oldbasingkarate.com%2FRESOURCES%2Fresources.html&psig=AOvVaw39Vmp-RLCAhdVkRwIBb9Bn&ust=1533331830946747");
 }
 
 td th {
@@ -18,7 +17,73 @@ td th {
     padding-bottom: 6px;
 }
 
+td {
+    padding-top: 6px;
+    padding-right: 10px;
+    padding-left: 10px;
+    padding-bottom: 6px;
+}
+
+th {
+    padding-top: 6px;
+    padding-right: 10px;
+    padding-left: 10px;
+    padding-bottom: 6px;
+}
+
 .stuff.logo {
     height: 42px;
     width: 42px;
+}
+
+.plate {
+    position: absolute;
+    top:0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 50%;
+    margin: auto;
+
+    /*width:250em;*/
+    /*height:250em;*/
+    border: 1px solid #ccc;
+    background-color: rgba(48, 49, 51, 0.5);
+    /*background-repeat: no-repeat;*/
+    /*background-position: center;*/
+    /*background-image: url(codewars_flag.png);*/
+    /*background-attachment: fixed;*/
+}
+
+#label {
+    position: relative;
+    left: 50px;
+
+}
+
+#textfield {
+    position: relative;
+    left: 50px;
+    width: 250px;
+    height: 80px;
+    font-size: 2em;
+    margin: auto;
+}
+
+#codewars_button {
+    background: none;
+    position: relative;
+    margin: auto;
+    left: 50px;
+    width: 250px;
+    height: 96px;
+}
+
+form {
+    position: absolute;
+    top: 25%;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    /*width: 50%;*/
 }
