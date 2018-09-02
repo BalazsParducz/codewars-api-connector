@@ -15,11 +15,23 @@
 <body>
 <h3 th:text="${error}">This is en error message</h3>
 
+<!--<div class="reminder">-->
+    <!--<h3>Get 1 point with solving CodeWars katas in an amount of 15 cherries.</h3>-->
+    <!--<h4>Exchange rates:</h4>-->
+    <!--<ul>-->
+        <!--<li>8 kyu - 1 cherry</li>-->
+        <!--<li>7 kyu - 2 cherries</li>-->
+        <!--<li>6 kyu - 4 cherries</li>-->
+        <!--<li>5 kyu - 6 cherries</li>-->
+        <!--<li>4 kyu - 8 cherries</li>-->
+        <!--<li>3 kyu - 12 cherries</li>-->
+        <!--<li>2 kyu - 16 cherries</li>-->
+        <!--<li>1 kyu - 20 cherries</li>-->
+    <!--</ul>-->
+    <!--<p><strong>In case you solve 4 or harder Katas, you also have to be able to speak about your code.</strong></p>-->
+<!--</div>-->
+
 <div class="stuff">
-
-
-    <!--<img src="https://egyprogramozo.eu/wp-content/uploads/2016/11/codewars.png" alt="Codewars logo">-->
-
 
     <table>
         <tr>
@@ -31,8 +43,8 @@
             <td><h3 th:text="${nameOfKata}"></h3></td>
         </tr>
         <tr>
-            <td><h3>Time of submission</h3></td>
-            <td><h3 th:text="${#dates.format(timeOfCompletion, 'yyyy. MMMMMMMMM dd., HH:mm:ss')}">Klán</h3></td>
+            <td><h3>Completed at</h3></td>
+            <td><h3 th:text="${#dates.format(timeOfCompletion, 'yyyy. MMMMMMMM dd., HH:mm:ss')}">Completion time missing</h3></td>
         </tr>
         <tr>
             <td><h3>User's clan</h3></td>
