@@ -58,26 +58,4 @@ public class ApiConnectorController {
         return "index";
     }
 
-//    private JSONArray getArrayOfKatas(String codewars_user) throws IOException {
-//        JSONObject jsonFromDetails = getJSON(apiService.apiOfCompletedChallengesFor(codewars_user));
-//        return jsonFromDetails.getJSONArray("data");
-//    }
-
-
-//    private JSONObject getJSON(String urlString) throws IOException {
-//        URL url = new URL(urlString);                                           // 1) URL megadása
-//        HttpURLConnection con = (HttpURLConnection) url.openConnection();       // 2) kapcsolódás
-//        con.setRequestMethod("GET");                                        // 3) Request method megadás
-//        BufferedReader in = new BufferedReader(                         // 4) Tartalom beolvasása
-//                new InputStreamReader(con.getInputStream()));
-//        String inputLine;                                               // 5) Segéd változó
-//        StringBuffer content = new StringBuffer();                      // 6) Tartalom változó létrehozása
-//        while ((inputLine = in.readLine()) != null) {                   // 7) A Tartalom változó "feltöltése" while-lal
-//            content.append(inputLine);
-//        }
-//        in.close();                                                     // 8)  a BufferedReader bezárása - szükséges
-//        String returnedFromCodewarsAPI = content.toString();            // 9) Segédváltozó: a vissatérő String egésze
-//        return new JSONObject(returnedFromCodewarsAPI);           // 10) JSON-ná alakítás
-//    }
-
 }

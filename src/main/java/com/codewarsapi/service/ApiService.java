@@ -11,20 +11,22 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
+import java.time.LocalDateTime;
+import java.time.chrono.ChronoLocalDateTime;
+import java.util.*;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 @Component
 public class ApiService {
 
     private final int pageOfRecentKatas = 0;
 
-
-    public String apiOfCompletedChallengesFor(String username) {
+    private String apiOfCompletedChallengesFor(String username) {
         return "https://www.codewars.com/api/v1/users/"+ username + "/code-challenges/completed?page=0";
     }
 
-    private JSONObject getJSON(String urlString) throws IOException {
+    JSONObject getJSON(String urlString) throws IOException {
         URL url = new URL(urlString);                                           // 1) URL megadása
         HttpURLConnection con = (HttpURLConnection) url.openConnection();       // 2) kapcsolódás
         con.setRequestMethod("GET");                                        // 3) Request method megadás
@@ -36,11 +38,12 @@ public class ApiService {
             content.append(inputLine);
         }
         in.close();                                                     // 8)  a BufferedReader bezárása - szükséges
-        String returnedFromCodewarsAPI = content.toString();            // 9) Segédváltozó: a vissatérő String egésze
+        String returnedFromCodewarsAPI = content.toString();            // 9) Segédváltozó: a visszatérő String egésze
         return new JSONObject(returnedFromCodewarsAPI);           // 10) JSON-ná alakítás
     }
 
-    public String apiOf(String username) {
+
+    private String apiOf(String username) {
         return "https://www.codewars.com/api/v1/users/" + username;
     }
 
@@ -73,7 +76,31 @@ public class ApiService {
     }
 
     public int getNrOfCompletedChallengesOf(String codewars_user) throws IOException {
-        int completedChallenges = getJSON(apiOf(codewars_user)).getJSONObject("codeChallenges").getInt("totalCompleted");
-        return completedChallenges;
+        return getJSON(apiOf(codewars_user)).getJSONObject("codeChallenges").getInt("totalCompleted");
     }
+
+//    public List<String> getKatasForAGivenPeriod(String codewarsUser, LocalDate beginningOfTwoWeeksPeriod) throws IOException {
+//        final List<String> katasOfGivenPeriod = new ArrayList<>();
+//        JSONArray array = getArrayOfKatas(codewarsUser);
+//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss'Z'");
+//        for(int i = 0; i<array.length(); i++) {
+//            String completionTimeAsString = array.getJSONObject(i).getString("completedAt");
+//            LocalDate submissionTime = LocalDate.parse(completionTimeAsString, formatter);
+//            if(submissionTime.isAfter(beginningOfTwoWeeksPeriod)) {
+//                katasOfGivenPeriod.add(array.getJSONObject(i).getString("id"));
+//            } else {
+//                break;
+//            }
+//        }
+//
+//        System.out.println(katasOfGivenPeriod.size());
+//        System.out.println(katasOfGivenPeriod);
+//        return katasOfGivenPeriod;
+//    }
+
+//
+//    public static void main(String[] args) throws IOException, ParseException {
+//        ApiService apiService = new ApiService();
+//        apiService.getKatasForAGivenPeriod("Balazs_Parducz", LocalDate.of(2017, 12, 1));
+//    }
 }
