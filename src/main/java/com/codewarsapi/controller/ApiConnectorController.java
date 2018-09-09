@@ -58,4 +58,10 @@ public class ApiConnectorController {
         return "index";
     }
 
+    @GetMapping("/latestKatas")
+    public String latestKatas() {
+        return "latestKatas";
+    }
+
+
 }
