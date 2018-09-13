@@ -79,28 +79,4 @@ public class ApiService {
         return getJSON(apiOf(codewars_user)).getJSONObject("codeChallenges").getInt("totalCompleted");
     }
 
-//    public List<String> getKatasForAGivenPeriod(String codewarsUser, LocalDate beginningOfTwoWeeksPeriod) throws IOException {
-//        final List<String> katasOfGivenPeriod = new ArrayList<>();
-//        JSONArray array = getArrayOfKatas(codewarsUser);
-//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss'Z'");
-//        for(int i = 0; i<array.length(); i++) {
-//            String completionTimeAsString = array.getJSONObject(i).getString("completedAt");
-//            LocalDate submissionTime = LocalDate.parse(completionTimeAsString, formatter);
-//            if(submissionTime.isAfter(beginningOfTwoWeeksPeriod)) {
-//                katasOfGivenPeriod.add(array.getJSONObject(i).getString("id"));
-//            } else {
-//                break;
-//            }
-//        }
-//
-//        System.out.println(katasOfGivenPeriod.size());
-//        System.out.println(katasOfGivenPeriod);
-//        return katasOfGivenPeriod;
-//    }
-
-//
-//    public static void main(String[] args) throws IOException, ParseException {
-//        ApiService apiService = new ApiService();
-//        apiService.getKatasForAGivenPeriod("Balazs_Parducz", LocalDate.of(2017, 12, 1));
-//    }
 }
