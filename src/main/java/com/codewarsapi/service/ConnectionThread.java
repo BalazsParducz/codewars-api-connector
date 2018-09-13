@@ -2,10 +2,8 @@ package com.codewarsapi.service;
 
 import com.codewarsapi.model.Kata;
 import org.json.JSONObject;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.IOException;
-import java.util.List;
 
 
 public class ConnectionThread implements Runnable {
@@ -15,7 +13,7 @@ public class ConnectionThread implements Runnable {
 
     private Kata kata;
 
-    public ConnectionThread(Kata kata, ApiService apiService) {
+    protected ConnectionThread(Kata kata, ApiService apiService) {
         this.kata = kata;
         this.apiService = apiService;
     }

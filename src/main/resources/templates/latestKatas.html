@@ -14,23 +14,37 @@
 </head>
 <body>
 
-<div class="stuff">
-    <h3>Get 1 point with solving CodeWars katas in an amount of 15 cherries.</h3>
-    <h4>Exchange rates:</h4>
-    <ul>
-        <li>8 kyu - 1 cherry</li>
-        <li>7 kyu - 2 cherries</li>
-        <li>6 kyu - 4 cherries</li>
-        <li>5 kyu - 6 cherries</li>
-        <li>4 kyu - 8 cherries</li>
-        <li>3 kyu - 12 cherries</li>
-        <li>2 kyu - 16 cherries</li>
-        <li>1 kyu - 20 cherries</li>
-    </ul>
-    <p><strong>In case you solve 4 or harder Katas, you also have to be able to speak about your code.</strong></p>
-</div>
+    <div class="stuff">
+        <h3>Get 1 point with solving CodeWars katas in an amount of 15 cherries.</h3>
+        <h4>Exchange rates:</h4>
+        <ul>
+            <li>8 kyu - 1 cherry</li>
+            <li>7 kyu - 2 cherries</li>
+            <li>6 kyu - 4 cherries</li>
+            <li>5 kyu - 6 cherries</li>
+            <li>4 kyu - 8 cherries</li>
+            <li>3 kyu - 12 cherries</li>
+            <li>2 kyu - 16 cherries</li>
+            <li>1 kyu - 20 cherries</li>
+        </ul>
+        <p><strong>In case you solve 4 or harder Katas, you also have to be able to speak about your code.</strong></p>
+    </div>
 
     <div class="stuff">
+        <table>
+            <tr>
+                <td><h1>Username</h1></td>
+                <td><h1 th:text="${username}"></h1></td>
+            </tr>
+            <tr th:each="kata : ${latestKatas}">
+                <td><h1>Kata</h1></td>
+                <td><h1 th:text="${kata}"></h1></td>
+            </tr>
+            <tr>
+                <td><h1>Points</h1></td>
+                <td><h1 th:text="${points}"></h1></td>
+            </tr>
+        </table>
         this is where latest katas html page is going to be visible
     </div>
 </body>

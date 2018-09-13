@@ -2,7 +2,6 @@ package com.codewarsapi.service;
 
 import com.codewarsapi.model.Kata;
 import org.json.JSONArray;
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -19,7 +18,6 @@ public class KataService {
     private ApiService apiService;
 
     private List<Kata> latestKatas;
-
 
     private List<Kata> setCherries(List<Kata> latestKatas) throws IOException {
         List<Thread> threads = new ArrayList<>();
@@ -38,6 +36,13 @@ public class KataService {
         return latestKatas;
     }
 
+    public int getTotalCherriesForKatasForAGivenPeriod(List<Kata> latestKatas) {
+        int cherries = 0;
+        for(Kata kata: latestKatas) {
+            cherries = cherries + kata.getCherries();
+        }
+        return cherries;
+    }
 
     public List<Kata> getKatasForAGivenPeriod(List<Kata> allKatas, LocalDate beginningOfPeriod) throws IOException {
         latestKatas = new ArrayList<>();
@@ -78,20 +83,4 @@ public class KataService {
         }
         return allKatasResolvedByUser;
     }
-
-//
-//    public int getPoints(List<Kata> katasToCalculatePointsFor) throws IOException {
-//        int allCherries = 0;
-//        for (Kata kata: katasToCalculatePointsFor) {
-//            allCherries += getCherriesFor(kata);
-//        }
-//        return allCherries/15;
-//    }
-
-//
-//    public static void main(String[] args) throws IOException {
-//        KataService kataService = new KataService();
-//        kataService.getCherriesFor("cut-the-cake");
-//        kataService.getPoints(getKatas);
-//    }
 }

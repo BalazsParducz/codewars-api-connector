@@ -39,11 +39,12 @@ public class ApiConnectorController {
     @Autowired
     private KataService kataService;
 
-    @Autowired
-    private SessionService sessionService;
-
-    @Autowired
-    private RequestService requestService;
+    // TODO
+//    @Autowired
+//    private SessionService sessionService;
+//
+//    @Autowired
+//    private RequestService requestService;
 
     @GetMapping("/")
     public String first(Model model) {
@@ -56,26 +57,19 @@ public class ApiConnectorController {
         try {
                 List<Kata> allKatas = kataService.allKatasResolvedByUser(codewars_user);
                 List<Kata> katasForAGivenPeriod = kataService.getKatasForAGivenPeriod(allKatas, LocalDate.now().minusWeeks(6));
+                int cherries = kataService.getTotalCherriesForKatasForAGivenPeriod(katasForAGivenPeriod);
+                int points = cherries/15;
 
                 model.addAttribute("latest", katasForAGivenPeriod);
-                model.addAttribute("username", apiService.getUserName(codewars_user));
-                model.addAttribute("clan", apiService.getUsersClan(codewars_user));
+                model.addAttribute("username", codewars_user);
+//                model.addAttribute("clan", apiService.getUsersClan(codewars_user));
                 model.addAttribute("completedChallenges", apiService.getNrOfCompletedChallengesOf(codewars_user));
-//                model.addAttribute("latestKatas", latestKatas);
-                model.addAttribute("nameOfKata", apiService.getNameOfKata(codewars_user));
-//                model.addAttribute("timeOfCompletion", timeOfCompletion);
                 model.addAttribute("allKatas", allKatas);
-//                model.addAttribute("cherries", cherries);
-//                model.addAttribute("points", points);
+                model.addAttribute("cherries", cherries);
+                model.addAttribute("points", points);
 
         } catch (IOException ioe) {
-            model.addAttribute("error", "Unable to connect to Codewars' API.");        // log error
-//        } catch (ParseException pe) {
-//            // TODO log new error
-//            model.addAttribute("error", "Unable to parse date.");        // log error
-        } catch (IllegalArgumentException iae) {
-            model.addAttribute("errormsg", "Please, provide a Codewars username");
-            return "provide_user";
+            ioe.printStackTrace();
         }
 
         return "index";
