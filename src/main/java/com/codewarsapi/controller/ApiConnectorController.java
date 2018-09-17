@@ -1,6 +1,7 @@
 package com.codewarsapi.controller;
 
 import com.codewarsapi.model.Kata;
+import com.codewarsapi.model.Mentor;
 import com.codewarsapi.service.ApiService;
 import com.codewarsapi.service.KataService;
 import com.codewarsapi.service.RequestService;
@@ -11,6 +12,7 @@ import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -46,6 +48,8 @@ public class ApiConnectorController {
 //    @Autowired
 //    private RequestService requestService;
 
+
+    @Secured("ROLE_USER")
     @GetMapping("/")
     public String first(Model model) {
         model.addAttribute("codewars_user");
@@ -56,7 +60,7 @@ public class ApiConnectorController {
     public String indexPage(@RequestParam("codewars_user") String codewars_user, Model model) {
         try {
                 List<Kata> allKatas = kataService.allKatasResolvedByUser(codewars_user);
-                List<Kata> katasForAGivenPeriod = kataService.getKatasForAGivenPeriod(allKatas, LocalDate.now().minusWeeks(6));
+                List<Kata> katasForAGivenPeriod = kataService.getKatasForAGivenPeriod(allKatas, LocalDate.now().minusDays(400));
                 int cherries = kataService.getTotalCherriesForKatasForAGivenPeriod(katasForAGivenPeriod);
                 int points = cherries/15;
 
@@ -74,4 +78,11 @@ public class ApiConnectorController {
 
         return "index";
     }
+
+    @RequestMapping("/registration")
+    public String registration(Model model) {
+        model.addAttribute("user", new Mentor());
+        return "registration";
+    }
+
 }
