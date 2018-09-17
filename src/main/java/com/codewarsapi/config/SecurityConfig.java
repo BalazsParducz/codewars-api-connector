@@ -15,8 +15,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     public void configureAuth(AuthenticationManagerBuilder auth) throws Exception {
-
-
             auth
                 .inMemoryAuthentication()
                     .withUser("B-dog")
@@ -29,11 +27,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity httpSec) throws Exception {
             httpSec
                     .authorizeRequests()
-                        .antMatchers(HttpMethod.GET, "/").permitAll()
-                        .antMatchers("/delete").hasRole("ADMIN")
                         .antMatchers("/admin/**").hasRole("ADMIN")
+                        .anyRequest().authenticated()
                         .and()
-                        .formLogin().permitAll();
+                    .formLogin()
+                        .loginPage("/login").permitAll()
+                        .and()
+                    .logout()
+                        .logoutSuccessUrl("/login?logout")
+                        .permitAll();
     }
 
 }
