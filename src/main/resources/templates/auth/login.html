@@ -1,10 +1,38 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3" xmlns:layout="http://www.w3.org/1999/xhtml">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8"/>
     <title>Title</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"/>
+    <link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/darkly/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-S7YMK1xjUjSpEnF4P8hPUcgjXYLZKK3fQW1j5ObLSl787II9p8RO9XUGehRmKsxd" crossorigin="anonymous"/>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+          integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="/basic.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
+<div layout:fragment="loginContent">
 
+    <form name="login" th:action="@{/login}" method="post" class="form-signin stuff">
+        <h2 class="form-signin-heading">Kérlek jelentkezz be</h2>
+        <div id="err" th:if="${param.error}" class="alert alert-danger">Hibás felhasználói név és jelszó</div>
+        <div th:if="${param.logout}" class="alert alert-success">Sikeresen kijelentkeztél</div>
+        <label for="username" class="sr-only">Felhasználói név</label>
+        <input type="text" id="username" name="username" class="form-control" placeholder="Felhasználói név" required="true" />
+        <label for="password" class="sr-only">Jelszó</label>
+        <input type="password" id="password" name="password" class="form-control" placeholder="Jelszó" required="true" />
+        <div class="checkbox">
+            <label> <input id="remember-me" name="remember-me" type="checkbox" /> Emlékezz rám
+            </label>
+        </div>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Bejelentkezés</button>
+    </form>
+    <a href="/registration">Registration</a>
+</div>
 </body>
 </html>
