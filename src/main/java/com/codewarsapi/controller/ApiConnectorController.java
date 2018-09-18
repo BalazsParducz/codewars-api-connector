@@ -1,37 +1,25 @@
 package com.codewarsapi.controller;
 
 import com.codewarsapi.model.Kata;
+import com.codewarsapi.model.Mentor;
 import com.codewarsapi.service.ApiService;
 import com.codewarsapi.service.KataService;
-import com.codewarsapi.service.RequestService;
-import com.codewarsapi.service.SessionService;
-import org.jboss.logging.Param;
-import org.json.JSONArray;
-import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpSession;
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
 
 @Controller
 public class ApiConnectorController {
 
-    public static final Logger LOGGER = LoggerFactory.getLogger(ApiConnectorController.class);
+    private final Logger localLOGGER = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
     private ApiService apiService;
@@ -46,6 +34,8 @@ public class ApiConnectorController {
 //    @Autowired
 //    private RequestService requestService;
 
+
+    @Secured("ROLE_USER")
     @GetMapping("/")
     public String first(Model model) {
         model.addAttribute("codewars_user");
@@ -56,7 +46,7 @@ public class ApiConnectorController {
     public String indexPage(@RequestParam("codewars_user") String codewars_user, Model model) {
         try {
                 List<Kata> allKatas = kataService.allKatasResolvedByUser(codewars_user);
-                List<Kata> katasForAGivenPeriod = kataService.getKatasForAGivenPeriod(allKatas, LocalDate.now().minusWeeks(6));
+                List<Kata> katasForAGivenPeriod = kataService.getKatasForAGivenPeriod(allKatas, LocalDate.now().minusDays(400));
                 int cherries = kataService.getTotalCherriesForKatasForAGivenPeriod(katasForAGivenPeriod);
                 int points = cherries/15;
 
@@ -74,4 +64,18 @@ public class ApiConnectorController {
 
         return "index";
     }
+
+    @RequestMapping("/registration")
+    public String registration(Model model) {
+        model.addAttribute("mentor", new Mentor());
+        return "registration";
+    }
+
+    @PostMapping("/reg")
+    public String greetingSubmit(@ModelAttribute Mentor mentor) {
+        System.out.println("New mentor");
+        localLOGGER.info("Új mentor");
+        return "auth/login";
+    }
+
 }
