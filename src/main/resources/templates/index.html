@@ -1,5 +1,8 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
     <meta charset="UTF-8"/>
     <title th:text="${username} + '\'s Codewars info.'">Default title</title>
@@ -10,64 +13,104 @@
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
           integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous"/>
     <link rel="stylesheet" href="basic.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
-
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="/">Kezdőoldal</a></li>
+                <li class=""><a href="/stories">Sztorik</a></li>
+                <li class=""><a href="/bloggers">Bloggerek</a></li>
+            </ul>
+            <div class="navbar-text navbar-right">
+                Üdvözlünk <span sec:authentication="name">Anonymous </span>
+                <form sec:authorize="isAuthenticated()" id="frmlogout" th:action="@{/logout}" method="post" class="form-inline">
+                    | <a href="javascript:{}" onclick="document.getElementById('frmlogout').submit(); return false;">Logged out</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</nav>
 <div class="stuff">
-
     <table>
         <tr>
             <td><h1>Username</h1></td>
             <td><h1 th:text="${username}"></h1></td>
         </tr>
         <!--<tr>-->
-            <!--<td><h3>User's clan</h3></td>-->
-            <!--<td><h3 th:text="${clan}"></h3></td>-->
+        <!--<td><h3>Number of completed challenges</h3></td>-->
+        <!--<td><h3 th:text="${completedChallenges}"></h3></td>-->
         <!--</tr>-->
         <tr>
-            <td><h3>Number of completed challenges</h3></td>
-            <td><h3 th:text="${completedChallenges}"></h3></td>
-        </tr>
-    </table>
-
-    <table>
-        <tr>
-            <th>Kata</th>
-            <th>Language(s)</th>
-            <th>Completed at</th>
-        </tr>
-        <tr th:each="kata : ${allKatas}">
-            <td th:text="${kata.getName()}">Name of kata</td>
-            <td th:text="${kata.getProgrammingLanguages()[0]}"></td>
-            <td th:text="${kata.getCompletedAt()}">Submission time</td>
+            <td><h1>Number of completed challenges</h1></td>
+            <td><h1 th:text="${completedChallenges}"></h1></td>
         </tr>
     </table>
 </div>
 
-<div class="stuff">
-    <table>
-        <tr>
-            <td><h3>Katas resolved in<br/>the past 2 weeks</h3></td>
-            <td><h3>Cherries</h3></td>
-        </tr>
-        <tr th:each="kata,iter: ${latest}" th:with="totalCherries=0">
-            <span>
-                <td th:text="${kata.getName()}">Name of kata</td>
-                <td th:text="${kata.getCherries()}" >Cherries</td>
-            </span>
-        </tr>
-        <tr>
-            <td><h3>Total cherries since:</h3></td>
-            <h3><td th:text="${cherries}"></td></h3>
-        </tr>
-        <span>
-            <td><h1>...which are worth :</h1></td>
-            <td th:text="${points} +' points'"><h1></h1></td>
-        </span>
-    </table>
 
+<div class="panel-group stuff2" id="accordion">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false">
+                    Show all katas resolved by user.
+                </a>
+            </h4>
+        </div>
+        <div id="collapseOne" class="panel-collapse collapse in">
+            <div class="panel-body">
+                <table>
+                    <tr>
+                        <th>Kata</th>
+                        <th>Language(s)</th>
+                        <th>Completed at</th>
+                    </tr>
+                    <tr th:each="kata : ${allKatas}">
+                        <td th:text="${kata.getName()}">Name of kata</td>
+                        <td th:text="${kata.getProgrammingLanguages()[0]}"></td>
+                        <td th:text="${kata.getCompletedAt()}">Submission time</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false">
+                    Show latest katas:
+                </a>
+            </h4>
+        </div>
+        <div id="collapseTwo" class="panel-collapse collapse">
+            <div class="panel-body">
+                <table>
+                    <tr>
+                        <td>Katas resolved in<br/>the past 2 weeks</td>
+                        <td>Cherries</td>
+                    </tr>
+                    <tr th:each="kata,iter: ${latest}" th:with="totalCherries=0">
+                    <span>
+                        <td th:text="${kata.getName()}">Name of kata</td>
+                        <td th:text="${kata.getCherries()}">Cherries</td>
+                    </span>
+                    </tr>
+                    <tr>
+                        <td>Total cherries since:</td>
+                        <td th:text="${cherries}"></td>
+                    </tr>
+                    <span>
+                        <td>...which are worth :</td>
+                        <td th:text="${points} +' points'"></td>
+                    </span>
+                </table>
+            </div>
+        </div>
+    </div>
 </div>
-
-
 </body>
 </html>
