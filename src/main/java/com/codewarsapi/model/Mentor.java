@@ -4,12 +4,14 @@ public class Mentor {
 
     private String username;
     private String password;
+    private String email;
 
     public Mentor() {}
 
-    public Mentor(String username, String password) {
+    public Mentor(String username, String email, String password) {
         super();
         this.username = username;
+        this.email = email;
         this.password = password;
     }
 
@@ -28,4 +30,8 @@ public class Mentor {
     public void setPassword(String password) {
         this.password = password;
     }
+
+    public String getEmail() { return email; }
+
+    public void setEmail(String email) { this.email = email; }
 }
