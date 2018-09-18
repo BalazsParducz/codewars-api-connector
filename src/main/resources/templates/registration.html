@@ -15,6 +15,7 @@
     <form name="registration" th:action="@{/reg}" th:object="${mentor}" method="post" class="form-signin">
         <h2 class="form-signin-heading">Please, register here</h2>
         <input type="text" id="username" name="username" th:field="*{username}" class="form-control" placeholder="Username"  />
+        <input type="email" id="email" name="email" th:field="*{email}" class="form-control" placeholder="Email at Codecool"  />
         <input type="password" id="password" name="password" th:field="*{password}"  class="form-control" placeholder="Password" />
         <button class="btn btn-lg btn-primary btn-block" type="submit">Yep, do it</button>
     </form>
