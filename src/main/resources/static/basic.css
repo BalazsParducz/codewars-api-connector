@@ -52,7 +52,7 @@ th {
     bottom: 0;
     left: 0;
     right: 0;
-    width: 50%;
+    /*width: 50%;*/
     margin: auto;
 
     /*width:250em;*/
@@ -67,13 +67,22 @@ th {
 
 #label {
     position: relative;
-    left: 50px;
+    /*left: 50px;*/
 
 }
 
 #textfield {
     position: relative;
-    left: 50px;
+    /*left: 50px;*/
+    width: 250px;
+    height: 80px;
+    font-size: 2em;
+    margin: auto;
+}
+
+#days {
+    position: relative;
+    /*left: 50px;*/
     width: 250px;
     height: 80px;
     font-size: 2em;

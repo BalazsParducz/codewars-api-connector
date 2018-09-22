@@ -1,9 +1,12 @@
 package com.codewarsapi.controller;
 
+import com.codewarsapi.Validator.MentorValidator;
 import com.codewarsapi.model.Kata;
 import com.codewarsapi.model.Mentor;
 import com.codewarsapi.service.ApiService;
 import com.codewarsapi.service.KataService;
+import com.codewarsapi.service.MentorService;
+import com.codewarsapi.service.SecurityService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +37,14 @@ public class ApiConnectorController {
 //    @Autowired
 //    private RequestService requestService;
 
+    @Autowired
+    private MentorService mentorService;
+
+    @Autowired
+    private SecurityService securityService;
+
+    @Autowired
+    private MentorValidator mentorValidator;
 
     @Secured("ROLE_USER")
     @GetMapping("/")
