@@ -28,7 +28,7 @@
             <div class="navbar-text navbar-right">
                 Üdvözlünk <span sec:authentication="name">Anonymous </span>
                 <form sec:authorize="isAuthenticated()" id="frmlogout" th:action="@{/logout}" method="post" class="form-inline">
-                    | <a href="javascript:{}" onclick="document.getElementById('frmlogout').submit(); return false;">Logged out</a>
+                    <a href="javascript:{}" onclick="document.getElementById('frmlogout').submit(); return false;">Logged out</a>
                 </form>
             </div>
         </div>
@@ -57,7 +57,7 @@
         <div class="panel-heading">
             <h4 class="panel-title">
                 <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false">
-                    Show all katas resolved by user.
+                    Show katas resolved by user from given period.
                 </a>
             </h4>
         </div>
@@ -65,32 +65,7 @@
             <div class="panel-body">
                 <table>
                     <tr>
-                        <th>Kata</th>
-                        <th>Language(s)</th>
-                        <th>Completed at</th>
-                    </tr>
-                    <tr th:each="kata : ${allKatas}">
-                        <td th:text="${kata.getName()}">Name of kata</td>
-                        <td th:text="${kata.getProgrammingLanguages()[0]}"></td>
-                        <td th:text="${kata.getCompletedAt()}">Submission time</td>
-                    </tr>
-                </table>
-            </div>
-        </div>
-    </div>
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <h4 class="panel-title">
-                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false">
-                    Show latest katas:
-                </a>
-            </h4>
-        </div>
-        <div id="collapseTwo" class="panel-collapse collapse">
-            <div class="panel-body">
-                <table>
-                    <tr>
-                        <td>Katas resolved in<br/>the past 2 weeks</td>
+                        <td>Katas resolved from<br th:text="${from}"/></td>
                         <td>Cherries</td>
                     </tr>
                     <tr th:each="kata,iter: ${latest}" th:with="totalCherries=0">
@@ -107,6 +82,31 @@
                         <td>...which are worth :</td>
                         <td th:text="${points} +' points'"></td>
                     </span>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false">
+                    Show all katas:
+                </a>
+            </h4>
+        </div>
+        <div id="collapseTwo" class="panel-collapse collapse">
+            <div class="panel-body">
+                <table>
+                    <tr>
+                        <th>Kata</th>
+                        <th>Language(s)</th>
+                        <th>Completed at</th>
+                    </tr>
+                    <tr th:each="kata : ${allKatas}">
+                        <td th:text="${kata.getName()}">Name of kata</td>
+                        <td th:text="${kata.getProgrammingLanguages()[0]}"></td>
+                        <td th:text="${kata.getCompletedAt()}">Submission time</td>
+                    </tr>
                 </table>
             </div>
         </div>
