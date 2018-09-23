@@ -23,16 +23,19 @@
 <div class="col-md-3">3-as</div>
 <div class="col-md-6">6-os
     <!--<div class="plate">-->
-        <form th:action="@{/getAPI}" th:object="${codewarsUser}" method="post">
+        <form th:action="@{/getAPI}" th:object="${codewars_user}" method="post">
             <div id="label">
                 <h1><label for="codewars_user">Provide Codewars username:</label></h1>
             </div>
             <div id="textfield">
                 <input type="text" id="codewars_user" name="codewars_user" placeholder="Codewars username" required="true"/>
             </div>
-            <div id="days">
-                <input type="date" id="numberOfDays" name="numberOfDays" placeholder="Days" required="true"/>
+            <div id="dateFrom">
+                <input type="date" id="from" name="from" placeholder="Days" required="true"/>
             </div>
+            <span id="dateTo">
+                <input type="date" id="to" name="to" placeholder="Days" required="true"/>
+            </span>
             <div id="codewars_button">
                 <button type="submit"><img src="codewars_button.jpeg"/></button>
             </div>

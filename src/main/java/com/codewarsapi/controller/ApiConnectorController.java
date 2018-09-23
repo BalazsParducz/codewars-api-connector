@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -54,10 +55,16 @@ public class ApiConnectorController {
     }
 
     @PostMapping(value = "/getAPI")
-    public String indexPage(@RequestParam("codewars_user") String codewars_user, Model model) {
+    public String indexPage(@RequestParam("codewars_user") String codewars_user,
+                            @RequestParam("from") String from,
+                            @RequestParam("to") String to,
+                            Model model) {
+        System.out.println(from);
+        LocalDate ldFrom = LocalDate.parse(from);
+        LocalDate ldTo = LocalDate.parse(to);
         try {
                 List<Kata> allKatas = kataService.allKatasResolvedByUser(codewars_user);
-                List<Kata> katasForAGivenPeriod = kataService.getKatasForAGivenPeriod(allKatas, LocalDate.now().minusDays(400));
+                List<Kata> katasForAGivenPeriod = kataService.getKatasForAGivenPeriod(allKatas, ldFrom, ldTo);
                 int cherries = kataService.getTotalCherriesForKatasForAGivenPeriod(katasForAGivenPeriod);
                 int points = cherries/15;
 
@@ -68,7 +75,8 @@ public class ApiConnectorController {
                 model.addAttribute("allKatas", allKatas);
                 model.addAttribute("cherries", cherries);
                 model.addAttribute("points", points);
-
+                model.addAttribute("from", from);
+                model.addAttribute("to", to);
         } catch (IOException ioe) {
             ioe.printStackTrace();
         }
