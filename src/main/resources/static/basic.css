@@ -2,7 +2,7 @@
 
 div.stuff {
     position: relative;
-    top: 25px;
+    top: 50px;
     left: 15%;
     width: 65%;
     border: 3px solid #aa0003;
@@ -12,7 +12,7 @@ div.stuff {
 
 div.stuff2 {
     position: relative;
-    top: 55px;
+    top: 65px;
     left: 15%;
     width: 65%;
     border: 3px solid #aa0003;

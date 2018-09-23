@@ -3,10 +3,7 @@ package com.codewarsapi.controller;
 import com.codewarsapi.Validator.MentorValidator;
 import com.codewarsapi.model.Kata;
 import com.codewarsapi.model.Mentor;
-import com.codewarsapi.service.ApiService;
-import com.codewarsapi.service.KataService;
-import com.codewarsapi.service.MentorService;
-import com.codewarsapi.service.SecurityService;
+import com.codewarsapi.service.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,6 +44,9 @@ public class ApiConnectorController {
     @Autowired
     private MentorValidator mentorValidator;
 
+    @Autowired
+    private EmailService emailService;
+
     @Secured("ROLE_USER")
     @GetMapping("/")
     public String first(Model model) {
@@ -77,6 +77,8 @@ public class ApiConnectorController {
                 model.addAttribute("points", points);
                 model.addAttribute("from", from);
                 model.addAttribute("to", to);
+                String emailText = emailService.generateEmailText(codewars_user, points, ldFrom, ldTo, katasForAGivenPeriod);
+//            emailService.sendMessage(mentorService.);
         } catch (IOException ioe) {
             ioe.printStackTrace();
         }
@@ -95,6 +97,14 @@ public class ApiConnectorController {
         System.out.println("New mentor");
         localLOGGER.info("Új mentor");
         return "auth/login";
+    }
+
+    @PostMapping("/email")
+    public String emailResults(@ModelAttribute("name") String name, String emailText) {
+        System.out.println(name);
+        System.out.println(emailText);
+        emailService.sendMessage(name, emailText);
+        return "index";
     }
 
 }

@@ -17,23 +17,36 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
-<nav class="navbar navbar-default">
-    <div class="container-fluid">
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav">
-                <li class="active"><a href="/">Main page</a></li>
-                <li class=""><a href="/stories"></a></li>
-                <li class=""><a href="/bloggers">Bloggerek</a></li>
-            </ul>
-            <div class="navbar-text navbar-right">
-                Üdvözlünk <span sec:authentication="name">Anonymous </span>
-                <form sec:authorize="isAuthenticated()" id="frmlogout" th:action="@{/logout}" method="post" class="form-inline">
-                    <a href="javascript:{}" onclick="document.getElementById('frmlogout').submit(); return false;">Logged out</a>
-                </form>
+
+    <nav class="navbar navbar-default">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+        <div class="container-fluid">
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="/">Main page</a></li>
+                    <li class=""><a href="/stories"></a></li>
+                    <li class=""><a href="/bloggers">Bloggerek</a></li>
+                </ul>
+                <div class="navbar-text navbar-center">
+                    Welcome <span sec:authentication="name">Anonymous </span>
+                    <form sec:authorize="isAuthenticated()" id="frmlogout" th:action="@{/logout}" method="post" class="form-inline">
+                        <a href="javascript:{}" onclick="document.getElementById('frmlogout').submit(); return false;">Logged
+                            out</a>
+                    </form>
+                </div>
+                <div class="navbar-text navbar-right">
+                    <form th:action="@{/email}" th:method="post">
+                        <input type="button" th:object="${name}" value="Email me these details"/>
+                    </form>
+                </div>
             </div>
         </div>
-    </div>
-</nav>
+        </div>
+        <div class="col-md-3"></div>
+    </nav>
+
+
 <div class="stuff">
     <table>
         <tr>
@@ -51,12 +64,12 @@
     </table>
 </div>
 
-
 <div class="panel-group stuff2" id="accordion">
     <div class="panel panel-default">
         <div class="panel-heading">
             <h4 class="panel-title">
-                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false">
+                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne"
+                   aria-expanded="false">
                     Show katas resolved by user for the requested period.
                 </a>
             </h4>
@@ -75,7 +88,7 @@
                     </span>
                     </tr>
                     <tr>
-                        <td>Total cherries since:</td>
+                        <td>Total cherries:</td>
                         <td th:text="${cherries}"></td>
                     </tr>
                     <span>
@@ -85,11 +98,11 @@
                 </table>
             </div>
         </div>
-    </div>
-    <div class="panel panel-default">
+
         <div class="panel-heading">
             <h4 class="panel-title">
-                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false">
+                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo"
+                   aria-expanded="false">
                     Show all katas:
                 </a>
             </h4>
@@ -112,5 +125,7 @@
         </div>
     </div>
 </div>
+
+
 </body>
 </html>
