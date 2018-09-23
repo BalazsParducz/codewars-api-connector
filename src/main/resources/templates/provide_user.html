@@ -12,22 +12,37 @@
     <link rel="stylesheet" href="basic.css"/>
 </head>
 <body>
+<div class="col-md-3"><span><h1>Mentor</h1></span></div>
+<div class="col-md-6">
+    <img src="codecool_symbol_flat.png" hight="200" width="200"/>
+</div>
+<div class="col-md-3"><span><h1>Aid</h1></span></div>
 
 
-    <div class="plate">
+
+<div class="col-md-3">3-as</div>
+<div class="col-md-6">6-os
+    <!--<div class="plate">-->
         <form th:action="@{/getAPI}" th:object="${codewars_user}" method="post">
             <div id="label">
-                <h1><label for="codewars_user">Codecooler's Codewars username:</label></h1>
+                <h1><label for="codewars_user">Provide Codewars username:</label></h1>
             </div>
             <div id="textfield">
                 <input type="text" id="codewars_user" name="codewars_user" placeholder="Codewars username" required="true"/>
             </div>
+            <div id="dateFrom">
+                <input type="date" id="from" name="from" placeholder="Days" required="true"/>
+            </div>
+            <span id="dateTo">
+                <input type="date" id="to" name="to" placeholder="Days" required="true"/>
+            </span>
             <div id="codewars_button">
                 <button type="submit"><img src="codewars_button.jpeg"/></button>
             </div>
         </form>
         <h1 th:text="${errormsg}"></h1>
-    </div>
-
+    <!--</div>-->
+</div>
+<div class="col-md-3">3-as</div>
 </body>
 </html>
