@@ -44,13 +44,13 @@ public class KataService {
         return cherries;
     }
 
-    public List<Kata> getKatasForAGivenPeriod(List<Kata> allKatas, LocalDate beginningOfPeriod) throws IOException {
+    public List<Kata> getKatasForAGivenPeriod(List<Kata> allKatas, LocalDate beginningOfPeriod, LocalDate endOfPeriod) throws IOException {
         latestKatas = new ArrayList<>();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss'Z'");
         for(Kata kata : allKatas) {
             String completionTimeAsString = kata.getCompletedAt();
             LocalDate submissionTime = LocalDate.parse(completionTimeAsString, formatter);
-            if(submissionTime.isAfter(beginningOfPeriod)) {
+            if(submissionTime.isAfter(beginningOfPeriod) && submissionTime.isBefore(endOfPeriod)) {
                 latestKatas.add(kata);
             } else {
                 break;

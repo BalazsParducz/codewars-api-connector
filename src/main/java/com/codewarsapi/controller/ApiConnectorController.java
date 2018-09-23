@@ -57,12 +57,14 @@ public class ApiConnectorController {
     @PostMapping(value = "/getAPI")
     public String indexPage(@RequestParam("codewars_user") String codewars_user,
                             @RequestParam("from") String from,
+                            @RequestParam("to") String to,
                             Model model) {
         System.out.println(from);
         LocalDate ldFrom = LocalDate.parse(from);
+        LocalDate ldTo = LocalDate.parse(to);
         try {
                 List<Kata> allKatas = kataService.allKatasResolvedByUser(codewars_user);
-                List<Kata> katasForAGivenPeriod = kataService.getKatasForAGivenPeriod(allKatas, ldFrom);
+                List<Kata> katasForAGivenPeriod = kataService.getKatasForAGivenPeriod(allKatas, ldFrom, ldTo);
                 int cherries = kataService.getTotalCherriesForKatasForAGivenPeriod(katasForAGivenPeriod);
                 int points = cherries/15;
 
@@ -74,6 +76,7 @@ public class ApiConnectorController {
                 model.addAttribute("cherries", cherries);
                 model.addAttribute("points", points);
                 model.addAttribute("from", from);
+                model.addAttribute("to", to);
         } catch (IOException ioe) {
             ioe.printStackTrace();
         }
