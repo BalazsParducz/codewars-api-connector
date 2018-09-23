@@ -12,13 +12,16 @@
           integrity="sha384-S7YMK1xjUjSpEnF4P8hPUcgjXYLZKK3fQW1j5ObLSl787II9p8RO9XUGehRmKsxd" crossorigin="anonymous"/>
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
           integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous"/>
-    <link rel="stylesheet" href="basic.css"/>
+    <link href="/basic.css" type="text/css" rel="stylesheet"/>
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
 </head>
 <body>
 
-    <nav class="navbar navbar-default">
+<nav class="navbar navbar-default">
         <div class="col-md-3"></div>
         <div class="col-md-6">
         <div class="container-fluid">
@@ -126,6 +129,18 @@
     </div>
 </div>
 
+    <div id="tester" style="width:600px;height:250px;"></div>
+    <script>
+        var data = [
+            {
+                x: ['giraffes', 'orangutans', 'monkeys'],
+                y: [20, 14, 23],
+                type: 'bar'
+            }
+        ];
+
+        Plotly.newPlot('tester', data);
+    </script>
 
 </body>
 </html>
