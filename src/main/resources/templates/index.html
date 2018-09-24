@@ -16,7 +16,6 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 
 </head>
 <body>
@@ -82,22 +81,30 @@
                 <table>
                     <tr>
                         <td>Katas resolved between<br th:text="${from} +' and '+ ${to}"/></td>
+                        <td>Submission Time</td>
+                        <td>Language</td>
                         <td>Cherries</td>
                     </tr>
                     <tr th:each="kata,iter: ${latest}" th:with="totalCherries=0">
                     <span>
                         <td th:text="${kata.getName()}">Name of kata</td>
+                        <td th:text="${kata.getCompletedAt()}">Submission time</td>
+                        <td th:text="${kata.getProgrammingLanguages()[0]}">Programming Language</td>
                         <td th:text="${kata.getCherries()}">Cherries</td>
                     </span>
                     </tr>
-                    <tr>
-                        <td>Total cherries:</td>
-                        <td th:text="${cherries}"></td>
+                    <tr class="bold" >
+                        <td></td>
+                        <td></td>
+                        <td class="bold">Total cherries:</td>
+                        <td class="bold" th:text="${cherries}"></td>
                     </tr>
-                    <span>
+                    <tr class="bold">
+                        <td></td>
+                        <td></td>
                         <td>...which are worth :</td>
                         <td th:text="${points} +' points'"></td>
-                    </span>
+                    </tr>
                 </table>
             </div>
         </div>
@@ -128,19 +135,6 @@
         </div>
     </div>
 </div>
-
-    <div id="tester" style="width:600px;height:250px;"></div>
-    <script>
-        var data = [
-            {
-                x: ['giraffes', 'orangutans', 'monkeys'],
-                y: [20, 14, 23],
-                type: 'bar'
-            }
-        ];
-
-        Plotly.newPlot('tester', data);
-    </script>
 
 </body>
 </html>
