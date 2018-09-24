@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.ServletRequestAttributes;
+import org.springframework.web.context.request.WebRequest;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
@@ -26,14 +27,14 @@ public class ErrorPageController implements ErrorController {
     }
 
     @RequestMapping(ERR_PATH)
-    public String error(Model model, HttpServletRequest request) {
-        RequestAttributes requestAttributes = new ServletRequestAttributes(request);
-//        Map<String, Object> error = this.errorAttributes.getErrorAttributes(requestAttributes, true);
-//        model.addAttribute("timestamp", error.get("timestamp"));
-//        model.addAttribute("error", error.get("error"));
-//        model.addAttribute("message", error.get("message"));
-//        model.addAttribute("path", error.get("path"));
-//        model.addAttribute("status", error.get("status"));
+    public String error(Model model, WebRequest request) {
+
+        Map<String, Object> error = this.errorAttributes.getErrorAttributes(request, true);
+        model.addAttribute("timestamp", error.get("timestamp"));
+        model.addAttribute("error", error.get("error"));
+        model.addAttribute("message", error.get("message"));
+        model.addAttribute("path", error.get("path"));
+        model.addAttribute("status", error.get("status"));
 
         return null;
     }

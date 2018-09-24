@@ -11,6 +11,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
 
 @EnableGlobalMethodSecurity(securedEnabled = true)
 @Configuration
@@ -55,11 +56,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             httpSec.csrf().disable()
                     .authorizeRequests()
                         .antMatchers("/admin/**").hasRole("ADMIN")
-                        .antMatchers("/registration", "/reg").permitAll()
+//                        .antMatchers("/user").hasRole("USER")
+                        .antMatchers("/**").permitAll()
                         .anyRequest().authenticated()
                         .and()
                     .formLogin()
                         .loginPage("/login").permitAll()
+                        .successHandler(new SimpleUrlAuthenticationSuccessHandler())
                         .and()
                     .logout()
                         .logoutSuccessUrl("/login?logout")

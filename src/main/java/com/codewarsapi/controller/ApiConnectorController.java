@@ -49,7 +49,7 @@ public class ApiConnectorController {
     @Autowired
     private EmailService emailService;
 
-    @Secured("ROLE_USER")
+//    @Secured("ROLE_USER")
     @GetMapping("/")
     public String first(Model model) {
         model.addAttribute("codewars_user");
