@@ -10,8 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Date;
@@ -93,9 +95,20 @@ public class ApiConnectorController {
     }
 
     @PostMapping("/reg")
-    public String greetingSubmit(@ModelAttribute Mentor mentor) {
+    public String greetingSubmit(@Valid @ModelAttribute Mentor mentor, BindingResult bindingResult) {
         System.out.println("New mentor");
         localLOGGER.info("Új mentor");
+
+//        mentorValidator.validate(mentor, bindingResult);
+
+        if (bindingResult.hasErrors()) {
+            return "registration";
+        }
+
+        mentorService.save(mentor);
+
+        securityService.autologin(mentor.getEmail(), mentor.getMatchingPassword());
+
         return "auth/login";
     }
 
