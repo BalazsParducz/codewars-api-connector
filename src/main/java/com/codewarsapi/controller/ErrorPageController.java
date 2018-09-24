@@ -2,11 +2,10 @@ package com.codewarsapi.controller;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.web.ErrorAttributes;
-import org.springframework.boot.autoconfigure.web.ErrorController;
+import org.springframework.boot.web.servlet.error.ErrorAttributes;
+import org.springframework.boot.web.servlet.error.ErrorController;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.ServletRequestAttributes;
@@ -29,12 +28,12 @@ public class ErrorPageController implements ErrorController {
     @RequestMapping(ERR_PATH)
     public String error(Model model, HttpServletRequest request) {
         RequestAttributes requestAttributes = new ServletRequestAttributes(request);
-        Map<String, Object> error = this.errorAttributes.getErrorAttributes(requestAttributes, true);
-        model.addAttribute("timestamp", error.get("timestamp"));
-        model.addAttribute("error", error.get("error"));
-        model.addAttribute("message", error.get("message"));
-        model.addAttribute("path", error.get("path"));
-        model.addAttribute("status", error.get("status"));
+//        Map<String, Object> error = this.errorAttributes.getErrorAttributes(requestAttributes, true);
+//        model.addAttribute("timestamp", error.get("timestamp"));
+//        model.addAttribute("error", error.get("error"));
+//        model.addAttribute("message", error.get("message"));
+//        model.addAttribute("path", error.get("path"));
+//        model.addAttribute("status", error.get("status"));
 
         return null;
     }

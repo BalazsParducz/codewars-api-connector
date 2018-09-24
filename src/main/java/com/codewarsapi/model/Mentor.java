@@ -4,6 +4,7 @@ package com.codewarsapi.model;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
+import javax.validation.constraints.AssertTrue;
 import javax.validation.constraints.NotNull;
 import java.util.Set;
 
@@ -16,12 +17,10 @@ public class Mentor {
     private Long id;
 
     @NotNull
-    @NotEmpty
     @Column( unique = true )
     private String email;
 
     @NotNull
-    @NotEmpty
     @Column
     private String password;
     private String matchingPassword;
@@ -37,26 +36,6 @@ public class Mentor {
         this.password = password;
     }
 
-    @NotNull
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(@NotNull String email) {
-        this.email = email;
-    }
-
-    @Transient
-    public String getMatchingPassword() {
-        return matchingPassword;
-    }
-
-    public void setMatchingPassword(String matchingPassword) {
-        this.matchingPassword = matchingPassword;
-    }
-
-
-
     public Long getId() {
         return id;
     }
@@ -65,13 +44,13 @@ public class Mentor {
         this.id = id;
     }
 
-//    public String getUsername() {
-//        return email;
-//    }
-//
-//    public void setUsername(String username) {
-//        this.email = username;
-//    }
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
     public String getPassword() {
         return password;
@@ -81,13 +60,16 @@ public class Mentor {
         this.password = password;
     }
 
-//    @ManyToMany
-//    @JoinTable(name = "mentor_role", joinColumns = @JoinColumn(name = "mentor_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
-//    public Set<Role> getRoles() {
-//        return roles;
-//    }
+    public String getMatchingPassword() {
+        return matchingPassword;
+    }
 
-//    public void setRoles(Set<Role> roles) {
-//        this.roles = roles;
-//    }
+    public void setMatchingPassword(String matchingPassword) {
+        this.matchingPassword = matchingPassword;
+    }
+
+    @AssertTrue(message="passVerify field should be equal than pass field")
+    private boolean isValid() {
+        return this.password.equals(this.matchingPassword);
+    }
 }

@@ -12,28 +12,43 @@
           integrity="sha384-S7YMK1xjUjSpEnF4P8hPUcgjXYLZKK3fQW1j5ObLSl787II9p8RO9XUGehRmKsxd" crossorigin="anonymous"/>
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
           integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous"/>
-    <link rel="stylesheet" href="basic.css"/>
+    <link href="/basic.css" type="text/css" rel="stylesheet"/>
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
 </head>
 <body>
+
 <nav class="navbar navbar-default">
-    <div class="container-fluid">
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav">
-                <li class="active"><a href="/">Main page</a></li>
-                <li class=""><a href="/stories"></a></li>
-                <li class=""><a href="/bloggers">Bloggerek</a></li>
-            </ul>
-            <div class="navbar-text navbar-right">
-                Üdvözlünk <span sec:authentication="name">Anonymous </span>
-                <form sec:authorize="isAuthenticated()" id="frmlogout" th:action="@{/logout}" method="post" class="form-inline">
-                    <a href="javascript:{}" onclick="document.getElementById('frmlogout').submit(); return false;">Logged out</a>
-                </form>
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+        <div class="container-fluid">
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="/">Main page</a></li>
+                    <li class=""><a href="/stories"></a></li>
+                    <li class=""><a href="/bloggers">Bloggerek</a></li>
+                </ul>
+                <div class="navbar-text navbar-center">
+                    Welcome <span sec:authentication="name">Anonymous </span>
+                    <form sec:authorize="isAuthenticated()" id="frmlogout" th:action="@{/logout}" method="post" class="form-inline">
+                        <a href="javascript:{}" onclick="document.getElementById('frmlogout').submit(); return false;">Logged
+                            out</a>
+                    </form>
+                </div>
+                <div class="navbar-text navbar-right">
+                    <form th:action="@{/email}" th:method="post">
+                        <input type="button" th:object="${name}" value="Email me these details"/>
+                    </form>
+                </div>
             </div>
         </div>
-    </div>
-</nav>
+        </div>
+        <div class="col-md-3"></div>
+    </nav>
+
+
 <div class="stuff">
     <table>
         <tr>
@@ -51,12 +66,12 @@
     </table>
 </div>
 
-
 <div class="panel-group stuff2" id="accordion">
     <div class="panel panel-default">
         <div class="panel-heading">
             <h4 class="panel-title">
-                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false">
+                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne"
+                   aria-expanded="false">
                     Show katas resolved by user for the requested period.
                 </a>
             </h4>
@@ -66,30 +81,38 @@
                 <table>
                     <tr>
                         <td>Katas resolved between<br th:text="${from} +' and '+ ${to}"/></td>
+                        <td>Submission Time</td>
+                        <td>Language</td>
                         <td>Cherries</td>
                     </tr>
                     <tr th:each="kata,iter: ${latest}" th:with="totalCherries=0">
                     <span>
                         <td th:text="${kata.getName()}">Name of kata</td>
+                        <td th:text="${kata.getCompletedAt()}">Submission time</td>
+                        <td th:text="${kata.getProgrammingLanguages()[0]}">Programming Language</td>
                         <td th:text="${kata.getCherries()}">Cherries</td>
                     </span>
                     </tr>
-                    <tr>
-                        <td>Total cherries since:</td>
-                        <td th:text="${cherries}"></td>
+                    <tr class="bold" >
+                        <td></td>
+                        <td></td>
+                        <td class="bold">Total cherries:</td>
+                        <td class="bold" th:text="${cherries}"></td>
                     </tr>
-                    <span>
+                    <tr class="bold">
+                        <td></td>
+                        <td></td>
                         <td>...which are worth :</td>
                         <td th:text="${points} +' points'"></td>
-                    </span>
+                    </tr>
                 </table>
             </div>
         </div>
-    </div>
-    <div class="panel panel-default">
+
         <div class="panel-heading">
             <h4 class="panel-title">
-                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false">
+                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo"
+                   aria-expanded="false">
                     Show all katas:
                 </a>
             </h4>
@@ -112,5 +135,6 @@
         </div>
     </div>
 </div>
+
 </body>
 </html>

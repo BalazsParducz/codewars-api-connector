@@ -22,26 +22,25 @@
 
 <div class="col-md-3">3-as</div>
 <div class="col-md-6">6-os
-    <!--<div class="plate">-->
+    <div class="stuff">
         <form th:action="@{/getAPI}" th:object="${codewars_user}" method="post">
-            <div id="label">
-                <h1><label for="codewars_user">Provide Codewars username:</label></h1>
-            </div>
-            <div id="textfield">
+            <!--<div id="label">-->
+                <!--<h1><label for="codewars_user">Provide Codewars username:</label></h1>-->
+            <!--</div>-->
+            <div class="textfield">Codewars username
                 <input type="text" id="codewars_user" name="codewars_user" placeholder="Codewars username" required="true"/>
             </div>
-            <div id="dateFrom">
+            <div class="textfield" id="dateFrom">From:
                 <input type="date" id="from" name="from" placeholder="Days" required="true"/>
             </div>
-            <span id="dateTo">
-                <input type="date" id="to" name="to" placeholder="Days" required="true"/>
-            </span>
-            <div id="codewars_button">
+            <div class="textfield" id="dateTo">To:
+                    <input type="date" id="to" name="to" placeholder="Days" required="true"/>
+                </div>
+            <div class="textfield" id="codewars_button">
                 <button type="submit"><img src="codewars_button.jpeg"/></button>
             </div>
         </form>
-        <h1 th:text="${errormsg}"></h1>
-    <!--</div>-->
+    </div>
 </div>
 <div class="col-md-3">3-as</div>
 </body>

@@ -2,7 +2,7 @@
 
 div.stuff {
     position: relative;
-    top: 25px;
+    top: 50px;
     left: 15%;
     width: 65%;
     border: 3px solid #aa0003;
@@ -12,7 +12,7 @@ div.stuff {
 
 div.stuff2 {
     position: relative;
-    top: 55px;
+    top: 65px;
     left: 15%;
     width: 65%;
     border: 3px solid #aa0003;
@@ -71,7 +71,7 @@ th {
 
 }
 
-#textfield {
+.textfield {
     position: relative;
     /*left: 50px;*/
     width: 250px;
@@ -80,14 +80,14 @@ th {
     margin: auto;
 }
 
-#days {
-    position: relative;
-    /*left: 50px;*/
-    width: 250px;
-    height: 80px;
-    font-size: 2em;
-    margin: auto;
-}
+/*#days {*/
+    /*position: relative;*/
+    /*!*left: 50px;*!*/
+    /*width: 250px;*/
+    /*height: 80px;*/
+    /*font-size: 2em;*/
+    /*margin: auto;*/
+/*}*/
 
 #codewars_button {
     background: none;
@@ -107,17 +107,23 @@ form {
     /*width: 50%;*/
 }
 
-#firstButton {
-    position: relative;
-    border: 3px solid #aa0003;
-    padding: 25px;
-    width: fit-content;
+.bold {
+    font-weight: bold;
+    font-size: 1.2em;
 }
 
-#secondButton {
-    position: relative;
-    top: 50px;
-    border: 3px solid #aa0003;
-    padding: 25px;
-    width: fit-content;
-}
+/*#firstButton {*/
+    /*position: relative;*/
+    /*border: 3px solid #aa0003;*/
+    /*padding: 25px;*/
+    /*width: fit-content;*/
+/*}*/
+
+/*#secondButton {*/
+    /*position: relative;*/
+    /*top: 50px;*/
+    /*border: 3px solid #aa0003;*/
+    /*padding: 25px;*/
+    /*width: fit-content;*/
+/*}*/
+

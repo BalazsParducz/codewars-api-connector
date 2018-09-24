@@ -3,44 +3,59 @@ package com.codewarsapi.config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @EnableGlobalMethodSecurity(securedEnabled = true)
 @Configuration
+@EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 
     @Autowired
-    private UserDetailsService userDetailsService;
+    private UserDetailsService mentorDetailsServiceImpl;
 
 
     @Bean
     public BCryptPasswordEncoder bCryptPasswordEncoder() {
         return new BCryptPasswordEncoder();
     }
-//
-//    @Autowired
-//    public void configureAuth(AuthenticationManagerBuilder auth) throws Exception {
-//            auth
-//                    .userDetailsService()
-////                .inMemoryAuthentication()
-////                    .withUser("B-dog")
-////                    .password("hungary")
-////                    .roles("USER");
-//    }
+
+    @Override
+    @Bean
+    protected UserDetailsService userDetailsService() {
+        return mentorDetailsServiceImpl;
+    }
+
+    @Override
+    @Bean
+    protected AuthenticationManager authenticationManager() throws Exception {
+        return super.authenticationManager();
+    }
+
+    @Autowired
+    public void configureAuth(AuthenticationManagerBuilder auth) throws Exception {
+            auth
+                    .userDetailsService(mentorDetailsServiceImpl);
+//                .inMemoryAuthentication()
+//                    .withUser("quert@freemail.hu")
+//                    .password("a")
+//                    .roles("USER");
+    }
 
 
     @Override
     protected void configure(HttpSecurity httpSec) throws Exception {
-            httpSec
+            httpSec.csrf().disable()
                     .authorizeRequests()
                         .antMatchers("/admin/**").hasRole("ADMIN")
-                        .antMatchers("/registration").permitAll()
+                        .antMatchers("/registration", "/reg").permitAll()
                         .anyRequest().authenticated()
                         .and()
                     .formLogin()

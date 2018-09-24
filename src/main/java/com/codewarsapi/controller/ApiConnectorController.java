@@ -3,18 +3,17 @@ package com.codewarsapi.controller;
 import com.codewarsapi.Validator.MentorValidator;
 import com.codewarsapi.model.Kata;
 import com.codewarsapi.model.Mentor;
-import com.codewarsapi.service.ApiService;
-import com.codewarsapi.service.KataService;
-import com.codewarsapi.service.MentorService;
-import com.codewarsapi.service.SecurityService;
+import com.codewarsapi.service.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Date;
@@ -47,6 +46,9 @@ public class ApiConnectorController {
     @Autowired
     private MentorValidator mentorValidator;
 
+    @Autowired
+    private EmailService emailService;
+
     @Secured("ROLE_USER")
     @GetMapping("/")
     public String first(Model model) {
@@ -77,6 +79,8 @@ public class ApiConnectorController {
                 model.addAttribute("points", points);
                 model.addAttribute("from", from);
                 model.addAttribute("to", to);
+                String emailText = emailService.generateEmailText(codewars_user, points, ldFrom, ldTo, katasForAGivenPeriod);
+//            emailService.sendMessage(mentorService.);
         } catch (IOException ioe) {
             ioe.printStackTrace();
         }
@@ -91,10 +95,29 @@ public class ApiConnectorController {
     }
 
     @PostMapping("/reg")
-    public String greetingSubmit(@ModelAttribute Mentor mentor) {
+    public String greetingSubmit(@Valid @ModelAttribute Mentor mentor, BindingResult bindingResult) {
         System.out.println("New mentor");
         localLOGGER.info("Új mentor");
+
+//        mentorValidator.validate(mentor, bindingResult);
+
+        if (bindingResult.hasErrors()) {
+            return "registration";
+        }
+
+        mentorService.save(mentor);
+
+        securityService.autologin(mentor.getEmail(), mentor.getMatchingPassword());
+
         return "auth/login";
+    }
+
+    @PostMapping("/email")
+    public String emailResults(@ModelAttribute("name") String name, String emailText) {
+        System.out.println(name);
+        System.out.println(emailText);
+        emailService.sendMessage(name, emailText);
+        return "index";
     }
 
 }
