@@ -19,7 +19,8 @@
 
 </head>
 <body>
-
+<div class=".col-xs-6 .col-sm-4"></div>
+<div class=".col-xs-6 .col-sm-4">
 <nav class="navbar navbar-default">
         <div class="col-md-3"></div>
         <div class="col-md-6">
@@ -37,18 +38,11 @@
                             out</a>
                     </form>
                 </div>
-                <div class="navbar-text navbar-right">
-                    <form th:action="@{/email}" th:method="post">
-                        <input type="button" th:object="${name}" value="Email me these details"/>
-                    </form>
-                </div>
             </div>
         </div>
         </div>
         <div class="col-md-3"></div>
     </nav>
-
-
 <div class="stuff">
     <table>
         <tr>
@@ -135,6 +129,13 @@
         </div>
     </div>
 </div>
-
+</div>
+<div class=".col-xs-6 .col-sm-4">
+    <div class="">
+        <form th:action="@{/email}" th:method="post">
+            <input type="button" th:object="${name}" value="Email me these details"/>
+        </form>
+    </div>
+</div>
 </body>
 </html>
