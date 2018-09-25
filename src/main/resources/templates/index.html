@@ -19,11 +19,10 @@
 
 </head>
 <body>
-<div class=".col-xs-6 .col-sm-4"></div>
-<div class=".col-xs-6 .col-sm-4">
+<div class="col-md-2"></div>
+<div class="col-md-8">
+
 <nav class="navbar navbar-default">
-        <div class="col-md-3"></div>
-        <div class="col-md-6">
         <div class="container-fluid">
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
@@ -40,22 +39,21 @@
                 </div>
             </div>
         </div>
-        </div>
-        <div class="col-md-3"></div>
-    </nav>
+</nav>
+
 <div class="stuff">
     <table>
-        <tr>
-            <td><h1>Username</h1></td>
-            <td><h1 th:text="${username}"></h1></td>
+        <tr class="bold">
+            <td >Codewars username:</td>
+            <td th:text="${username}"></td>
         </tr>
         <!--<tr>-->
         <!--<td><h3>Number of completed challenges</h3></td>-->
         <!--<td><h3 th:text="${completedChallenges}"></h3></td>-->
         <!--</tr>-->
-        <tr>
-            <td><h1>Number of completed challenges</h1></td>
-            <td><h1 th:text="${completedChallenges}"></h1></td>
+        <tr class="bold">
+            <td>Number of completed challenges</td>
+            <td align="center" th:text="${completedChallenges}"</td>
         </tr>
     </table>
 </div>
@@ -74,30 +72,32 @@
             <div class="panel-body">
                 <table>
                     <tr>
-                        <td>Katas resolved between<br th:text="${from} +' and '+ ${to}"/></td>
-                        <td>Submission Time</td>
-                        <td>Language</td>
-                        <td>Cherries</td>
+                        <th>Nr</th>
+                        <th>Katas resolved between<br th:text="${from} +' and '+ ${to}"/></th>
+                        <th>Submission Time</th>
+                        <th>Language</th>
+                        <th>Cherries</th>
                     </tr>
                     <tr th:each="kata,iter: ${latest}" th:with="totalCherries=0">
-                    <span>
+                        <td th:text="${iter.index+1}"></td>
                         <td th:text="${kata.getName()}">Name of kata</td>
                         <td th:text="${kata.getCompletedAt()}">Submission time</td>
-                        <td th:text="${kata.getProgrammingLanguages()[0]}">Programming Language</td>
-                        <td th:text="${kata.getCherries()}">Cherries</td>
-                    </span>
+                        <td align="center" th:text="${kata.getProgrammingLanguages()[0]}">Programming Language</td>
+                        <td align="center" th:text="${kata.getCherries()}">Cherries</td>
                     </tr>
                     <tr class="bold" >
                         <td></td>
                         <td></td>
-                        <td class="bold">Total cherries:</td>
-                        <td class="bold" th:text="${cherries}"></td>
+                        <td align="right">Total cherries:</td>
+                        <td></td>
+                        <td align="center" th:text="${cherries}"></td>
                     </tr>
                     <tr class="bold">
                         <td></td>
                         <td></td>
-                        <td>...which are worth :</td>
-                        <td th:text="${points} +' points'"></td>
+                        <td align="right">...which are worth :</td>
+                        <td></td>
+                        <td align="center" th:text="${points} +' points'"></td>
                     </tr>
                 </table>
             </div>
@@ -115,14 +115,17 @@
             <div class="panel-body">
                 <table>
                     <tr>
+                        <th>Nr</th>
                         <th>Kata</th>
                         <th>Language(s)</th>
                         <th>Completed at</th>
                     </tr>
-                    <tr th:each="kata : ${allKatas}">
+
+                    <tr th:each="kata,iter : ${allKatas}">
+                        <td th:text="${iter.index+1}"></td>
                         <td th:text="${kata.getName()}">Name of kata</td>
-                        <td th:text="${kata.getProgrammingLanguages()[0]}"></td>
-                        <td th:text="${kata.getCompletedAt()}">Submission time</td>
+                        <td align="center" th:text="${kata.getProgrammingLanguages()[0]}"></td>
+                        <td align="center" th:text="${kata.getCompletedAt()}">Submission time</td>
                     </tr>
                 </table>
             </div>
@@ -130,7 +133,7 @@
     </div>
 </div>
 </div>
-<div class=".col-xs-6 .col-sm-4">
+<div class="col-md-2">
     <div class="">
         <form th:action="@{/email}" th:method="post">
             <input type="button" th:object="${name}" value="Email me these details"/>

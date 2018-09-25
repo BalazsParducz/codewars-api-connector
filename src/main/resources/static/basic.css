@@ -2,21 +2,21 @@
 
 div.stuff {
     position: relative;
-    top: 50px;
-    left: 15%;
-    width: 65%;
+    top: 40px;
+    /*left: 15%;*/
+    width: 100%;
     border: 3px solid #aa0003;
-    padding: 50px;
+    padding: 25px;
     background-color: #222222;
 }
 
 div.stuff2 {
     position: relative;
     top: 65px;
-    left: 15%;
-    width: 65%;
+    /*left: 15%;*/
+    width: 100%;
     border: 3px solid #aa0003;
-    padding: 50px;
+    padding: 25px;
     background-color: #222222;
 }
 
@@ -35,16 +35,17 @@ td {
 }
 
 th {
+    align-content: center;
     padding-top: 6px;
     padding-right: 10px;
     padding-left: 10px;
     padding-bottom: 6px;
 }
 
-.stuff.logo {
-    height: 42px;
-    width: 42px;
-}
+/*.stuff.logo {*/
+    /*height: 42px;*/
+    /*width: 42px;*/
+/*}*/
 
 .plate {
     position: absolute;
@@ -65,46 +66,69 @@ th {
     /*background-attachment: fixed;*/
 }
 
-#label {
-    position: relative;
-    /*left: 50px;*/
+/*#label {*/
+    /*position: relative;*/
+    /*!*left: 50px;*!*/
 
-}
+/*}*/
 
 .textfield {
+    display: inline-block;
     position: relative;
-    /*left: 50px;*/
+    float: left;
+    right: -300px;
     width: 250px;
     height: 80px;
     font-size: 2em;
-    margin: auto;
+    margin-left: 5%;
+    margin-top: 3%;
 }
 
-/*#days {*/
-    /*position: relative;*/
-    /*!*left: 50px;*!*/
-    /*width: 250px;*/
-    /*height: 80px;*/
-    /*font-size: 2em;*/
-    /*margin: auto;*/
-/*}*/
+#button-row {
+    float: right;
+    position: relative;
+    right: 0;
+    bottom: 0;
+}
 
 #codewars_button {
+    /*display: grid;*/
     background: none;
     position: relative;
-    margin: auto;
-    left: 50px;
-    width: 250px;
-    height: 96px;
+    /*right: 0;*/
+    /*bottom: 0;*/
+    right: -300px;
+    width: 130px;
+    height: 46px;
+    cursor: pointer;
 }
 
-form {
-    position: absolute;
-    top: 25%;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    /*width: 50%;*/
+button:hover {
+    background-color: darkred;
+}
+
+label {
+    display: inline-block;
+}
+
+.row:after {
+    width: 100%;
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.col-30 {
+    float: left;
+    width: 30%;
+    margin-top: 6px;
+}
+
+.col-70 {
+    float: left;
+    width: 70%;
+    display: inline-block;
+    margin-top: 6px;
 }
 
 .bold {
@@ -112,18 +136,4 @@ form {
     font-size: 1.2em;
 }
 
-/*#firstButton {*/
-    /*position: relative;*/
-    /*border: 3px solid #aa0003;*/
-    /*padding: 25px;*/
-    /*width: fit-content;*/
-/*}*/
-
-/*#secondButton {*/
-    /*position: relative;*/
-    /*top: 50px;*/
-    /*border: 3px solid #aa0003;*/
-    /*padding: 25px;*/
-    /*width: fit-content;*/
-/*}*/
 
