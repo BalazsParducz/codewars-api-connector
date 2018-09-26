@@ -16,9 +16,14 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
+    <!-- Latest compiled and minified plotly.js JavaScript -->
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script src="/plotly.js"></script>
 </head>
 <body>
+<input type="hidden" id="codewars_username" th:value="${username}">
+<input type="hidden" id="from" th:value="${from}">
+<input type="hidden" id="to" th:value="${to}">
 <div class="col-md-2"></div>
 <div class="col-md-8">
 
@@ -53,7 +58,7 @@
         <!--</tr>-->
         <tr class="bold">
             <td>Number of completed challenges</td>
-            <td align="center" th:text="${completedChallenges}"</td>
+            <td align="center" th:text="${completedChallenges}"></td>
         </tr>
     </table>
 </div>
@@ -132,6 +137,9 @@
         </div>
     </div>
 </div>
+    <div class="stuff2">
+        <div id="plotly"></div>
+    </div>
 </div>
 <div class="col-md-2">
     <div class="">
@@ -140,5 +148,6 @@
         </form>
     </div>
 </div>
+
 </body>
 </html>

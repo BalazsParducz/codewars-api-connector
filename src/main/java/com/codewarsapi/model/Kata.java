@@ -2,6 +2,9 @@ package com.codewarsapi.model;
 
 import org.json.JSONArray;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 public class Kata {
 
     String id;
@@ -47,6 +50,15 @@ public class Kata {
 
     public void setCompletedAt(String completedAt) {
         this.completedAt = completedAt;
+    }
+
+    public LocalDate getCompletedAsLocalDate() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss'Z'");
+        return LocalDate.parse(completedAt, formatter);
+    }
+
+    public String getYearAndMonth() {
+        return getCompletedAsLocalDate().format(DateTimeFormatter.ofPattern("yyyy-MM"));
     }
 
     public String getKyu() {

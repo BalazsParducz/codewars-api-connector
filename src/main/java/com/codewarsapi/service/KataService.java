@@ -7,9 +7,10 @@ import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @Component
 public class KataService {
@@ -45,24 +46,35 @@ public class KataService {
     }
 
     public List<Kata> getKatasForAGivenPeriod(List<Kata> allKatas, LocalDate beginningOfPeriod, LocalDate endOfPeriod) throws IOException {
-        latestKatas = new ArrayList<>();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss'Z'");
-        for(Kata kata : allKatas) {
-            String completionTimeAsString = kata.getCompletedAt();
-            LocalDate submissionTime = LocalDate.parse(completionTimeAsString, formatter);
-            if(submissionTime.isAfter(beginningOfPeriod) && submissionTime.isBefore(endOfPeriod)) {
-                latestKatas.add(kata);
-            } else {
-                break;
-            }
-        }
+//        latestKatas = new ArrayList<>();
+//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss'Z'");
+//        for(Kata kata : allKatas) {
+//            String completionTimeAsString = kata.getCompletedAt();
+//            LocalDate submissionTime = LocalDate.parse(completionTimeAsString, formatter);
+//            if(submissionTime.isAfter(beginningOfPeriod) && submissionTime.isBefore(endOfPeriod)) {
+//                latestKatas.add(kata);
+//            } else {
+//                break;
+//            }
+//        }
+
+        latestKatas = allKatas.stream()
+                .filter(
+                        kata ->
+                                kata.getCompletedAsLocalDate().isAfter(beginningOfPeriod) &&
+                                kata.getCompletedAsLocalDate().isBefore(endOfPeriod)
+                )
+                .collect(Collectors.toList());
+
         setCherries(latestKatas);
-        System.out.println("Recent katas " + latestKatas.size());
-        System.out.println(latestKatas);
+
         return latestKatas;
     }
 
+    public Map<String, Long> getPlotlyData(List<Kata> katas) {
+        return katas.stream().collect(Collectors.groupingBy(Kata::getYearAndMonth, Collectors.counting()));
 
+    }
 
     public List<Kata> allKatasResolvedByUser(String codewarsUsername) throws IOException {
         final List<Kata> allKatasResolvedByUser = new ArrayList<>();
