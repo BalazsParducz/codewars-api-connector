@@ -88,13 +88,13 @@ public class ApiConnectorController {
         return "index";
     }
 
-    @RequestMapping("/registration")
+    @GetMapping("/registration")
     public String registration(Model model) {
         model.addAttribute("mentor", new Mentor());
         return "registration";
     }
 
-    @PostMapping("/reg")
+    @PostMapping("/registration")
     public String greetingSubmit(@Valid @ModelAttribute Mentor mentor, BindingResult bindingResult) {
         System.out.println("New mentor");
         localLOGGER.info("Új mentor");

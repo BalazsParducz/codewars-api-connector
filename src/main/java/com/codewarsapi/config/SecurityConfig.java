@@ -3,6 +3,7 @@ package com.codewarsapi.config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -54,11 +55,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity httpSec) throws Exception {
             httpSec.csrf().disable()
+//                    .authorizeRequests()
+//                    .anyRequest().permitAll();
+//
+//            httpSec.formLogin().disable();
                     .authorizeRequests()
                         .antMatchers("/admin/**").hasRole("ADMIN")
 //                        .antMatchers("/user").hasRole("USER")
-                        .antMatchers("/**").permitAll()
-                        .anyRequest().authenticated()
+                        .antMatchers("/registration").permitAll()     // ez ellentmond a következő sornak - minent lehet
+                        .anyRequest().authenticated()                   // és mindent autentikál azon kívül
                         .and()
                     .formLogin()
                         .loginPage("/login").permitAll()

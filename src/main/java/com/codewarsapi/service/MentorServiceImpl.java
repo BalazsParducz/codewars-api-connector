@@ -21,7 +21,7 @@ public class MentorServiceImpl implements MentorService {
     @Override
     public void save(Mentor mentor) {
         mentor.setPassword(bCryptPasswordEncoder.encode(mentor.getPassword()));
-        mentor.setMatchingPassword(bCryptPasswordEncoder.encode(mentor.getMatchingPassword()));
+//        mentor.setMatchingPassword(bCryptPasswordEncoder.encode(mentor.getMatchingPassword()));
 //        user.setRoles(new HashSet<>(roleRepository.findAll()));
         mentorRepo.save(mentor);
     }

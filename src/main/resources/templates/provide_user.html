@@ -1,8 +1,10 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
     <meta charset="UTF-8"/>
-    <title th:text="'Balázs\'s Codewars info.'">Default title</title>
+    <title th:text="'Codewars info'">Default title</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"/>
     <link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/darkly/bootstrap.min.css" rel="stylesheet"
@@ -23,16 +25,17 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li class="active"><a href="/">Main page</a></li>
-                    <li class=""><a href="/stories"></a></li>
-                    <li class=""><a href="/bloggers">Bloggerek</a></li>
+                    <!--<li class=""><a href="/stories"></a></li>-->
+                    <!--<li class=""><a href="/bloggers">Bloggerek</a></li>-->
                 </ul>
                 <div class="navbar-text navbar-center">
-                    Welcome <span sec:authentication="name">Anonymous </span>
-                    <form sec:authorize="isAuthenticated()" id="frmlogout" th:action="@{/logout}" method="post"
-                          class="form-inline">
-                        <a href="javascript:{}" onclick="document.getElementById('frmlogout').submit(); return false;">Logged
+                    <form sec:authorize="isAuthenticated()" id="frmlogout" th:action="@{/logout}" method="post" class="form-inline">
+                        <a href="javascript:{}" onclick="document.getElementById('frmlogout').submit(); return false;">Log
                             out</a>
                     </form>
+                </div>
+                <div class="navbar-text navbar-right">
+                    Welcome <span sec:authentication="name">Anonymous </span>
                 </div>
             </div>
         </div>
