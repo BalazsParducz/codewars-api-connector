@@ -62,7 +62,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .authorizeRequests()
                         .antMatchers("/admin/**").hasRole("ADMIN")
 //                        .antMatchers("/user").hasRole("USER")
-                        .antMatchers("/registration").permitAll()     // ez ellentmond a következő sornak - minent lehet
+                        .antMatchers("/registration","/codecool_symbol_flat.png").permitAll()     // ez ellentmond a következő sornak - minent lehet
                         .anyRequest().authenticated()                   // és mindent autentikál azon kívül
                         .and()
                     .formLogin()

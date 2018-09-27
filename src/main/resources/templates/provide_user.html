@@ -16,7 +16,7 @@
 <body>
 <div class="col-md-2">
     <h1 align="center">Mentor</h1>
-    <img align="center" src="codecool_symbol_flat.png" height="100" width="100"/>
+    <div align="center"><img src="codecool_symbol_flat.png" height="100" width="100"/></div>
     <h1 align="center">Aid</h1>
 </div>
 <div class="col-md-8">
@@ -25,8 +25,6 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li class="active"><a href="/">Main page</a></li>
-                    <!--<li class=""><a href="/stories"></a></li>-->
-                    <!--<li class=""><a href="/bloggers">Bloggerek</a></li>-->
                 </ul>
                 <div class="navbar-text navbar-center">
                     <form sec:authorize="isAuthenticated()" id="frmlogout" th:action="@{/logout}" method="post" class="form-inline">
