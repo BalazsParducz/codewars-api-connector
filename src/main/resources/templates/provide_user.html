@@ -12,6 +12,7 @@
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
           integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous"/>
     <link rel="stylesheet" href="basic.css"/>
+    <script type="text/javascript" src="setDates.js" defer></script>
 </head>
 <body>
 <div class="col-md-2">
@@ -42,39 +43,22 @@
     <div class="stuff3">
         <form th:action="@{/getAPI}" th:object="${codewars_user}" method="post" role="form">
             <div class="form-group">
-                <!--<div class="col-30">-->
                     <label for="codewars_user">Provide Codewars username:</label>
-                <!--</div>-->
-                <!--<div class="col-70 textfield">-->
                     <input class="form-control"  type="text" id="codewars_user" name="codewars_user" placeholder="Codewars username"
                            required="true"/>
-                <!--</div>-->
             </div>
-
+            <div><button type="button" class="btn-default" id="setDate" >Show past 2 weeks</button></div>
             <div class="form-group">
-                <!--<div class="col-30">-->
                     <label for="from">From:</label>
-                <!--</div>-->
-                <!--<div class="col-70 textfield">-->
                     <input class="form-control"  type="date" id="from" name="from" placeholder="Days" required="true"/>
-                <!--</div>-->
             </div>
 
             <div class="form-group">
-                <!--<div class="col-30">-->
                     <label for="to">To:</label>
-                <!--</div>-->
-                <!--<div class="col-70 textfield">-->
                     <input class="form-control"  type="date" id="to" name="to" placeholder="Days" required="true"/>
-                <!--</div>-->
             </div>
             <div class="form-group">
-                <!--<div class="col-50">-->
-                    <!--<label for="codewars_button">Retrieve data:</label>-->
-                <!--</div>-->
-                <!--<div class="form-control">-->
                     <button type="submit" id="codewars_button"><img src="codewars.png" width="250" height="80"/></button>
-                <!--</div>-->
             </div>
 
         </form>
