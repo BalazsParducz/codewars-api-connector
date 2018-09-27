@@ -55,13 +55,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity httpSec) throws Exception {
             httpSec.csrf().disable()
-//                    .authorizeRequests()
-//                    .anyRequest().permitAll();
-//
-//            httpSec.formLogin().disable();
+
                     .authorizeRequests()
                         .antMatchers("/admin/**").hasRole("ADMIN")
-//                        .antMatchers("/user").hasRole("USER")
                         .antMatchers("/registration","/codecool_symbol_flat.png").permitAll()     // ez ellentmond a következő sornak - minent lehet
                         .anyRequest().authenticated()                   // és mindent autentikál azon kívül
                         .and()

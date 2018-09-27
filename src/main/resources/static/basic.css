@@ -6,7 +6,7 @@ div.stuff {
     /*left: 15%;*/
     width: 100%;
     border: 3px solid #aa0003;
-    padding: 25px;
+    padding: 35px;
     background-color: #222222;
 }
 
@@ -16,7 +16,17 @@ div.stuff2 {
     /*left: 15%;*/
     width: 100%;
     border: 3px solid #aa0003;
-    padding: 25px;
+    padding: 35px;
+    background-color: #222222;
+}
+
+div.stuff3 {
+    position: relative;
+    border: 3px solid #aa0003;
+    padding-top: 5%;
+    padding-left: 20%;
+    padding-right: 20%;
+    padding-bottom: 5%;
     background-color: #222222;
 }
 
@@ -92,14 +102,11 @@ th {
 }
 
 #codewars_button {
-    /*display: grid;*/
-    background: none;
+    background: white;
     position: relative;
-    /*right: 0;*/
-    /*bottom: 0;*/
-    right: -300px;
-    width: 130px;
-    height: 46px;
+    right: -160px;
+    width: 265px;
+    height: 95px;
     cursor: pointer;
 }
 

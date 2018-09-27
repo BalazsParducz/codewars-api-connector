@@ -18,9 +18,7 @@
 </head>
 <body>
 <div class="col-md-3">
-    <!--<h1 align="center">Mentor</h1>-->
-    <!--<div align="center"><img src="codecool_symbol_flat.png" height="100" width="100"/></div>-->
-    <!--<h1 align="center">Aid</h1>-->
+
 </div>
 <div class="col-md-6">
 <!--<div layout:fragment="loginContent">--><div>
@@ -28,7 +26,7 @@
     <div align="center"><img src="codecool_symbol_flat.png" height="100" width="100"/></div></span>
     <span><h1 align="center">Aid</h1></span></div>
     <form name="login" th:action="@{/login}" method="post" class="form-signin stuff">
-        <h2 class="form-signin-heading">Please, log in</h2>
+        <h3 class="form-signin-heading">Please, log in</h3>
         <div id="err" th:if="${param.error}" class="alert alert-danger">Incorrect username</div>
         <div th:if="${param.logout}" class="alert alert-success">Log out has been successful</div>
         <label for="username" class="sr-only">Email as username</label>
