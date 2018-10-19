@@ -51,10 +51,6 @@
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-mail</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
         <dependency>
@@ -65,17 +61,17 @@
         <dependency>
             <groupId>com.heroku.api</groupId>
             <artifactId>heroku-api</artifactId>
-            <version>${heroku.jar.version}</version>
+            <version>0.33</version>
         </dependency>
         <dependency>
             <groupId>com.heroku.api</groupId>
             <artifactId>heroku-json-jackson</artifactId>
-            <version>${heroku.jar.version}</version>
+            <version>0.33</version>
         </dependency>
         <dependency>
             <groupId>com.heroku.api</groupId>
             <artifactId>heroku-http-apache</artifactId>
-            <version>${heroku.jar.version}</version>
+            <version>0.33</version>
         </dependency>
     </dependencies>
 
@@ -89,6 +85,7 @@
             <plugin>
                 <groupId>com.heroku.sdk</groupId>
                 <artifactId>heroku-maven-plugin</artifactId>
+                <version>2.0.6</version>
             </plugin>
 
         </plugins>
