@@ -1,6 +1,6 @@
 
 
-div.stuff {
+div.cont {
     position: relative;
     top: 40px;
     /*left: 15%;*/
@@ -10,7 +10,11 @@ div.stuff {
     background-color: #222222;
 }
 
-div.stuff2 {
+.inpdemo {
+    margin-top: 15px;
+}
+
+div.cont2 {
     position: relative;
     top: 65px;
     /*left: 15%;*/
@@ -20,7 +24,7 @@ div.stuff2 {
     background-color: #222222;
 }
 
-div.stuff3 {
+div.cont3 {
     position: relative;
     border: 3px solid #aa0003;
     padding-top: 5%;
