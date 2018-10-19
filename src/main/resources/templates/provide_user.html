@@ -40,19 +40,18 @@
         </div>
     </nav>
 
-    <div class="stuff3">
+    <div class="cont3">
         <form th:action="@{/getAPI}" th:object="${codewars_user}" method="post" role="form">
             <div class="form-group">
                     <label for="codewars_user">Provide Codewars username:</label>
                     <input class="form-control"  type="text" id="codewars_user" name="codewars_user" placeholder="Codewars username"
                            required="true"/>
             </div>
-            <div><button type="button" class="btn-default" id="setDate" >Show past 2 weeks</button></div>
+            <div align="right"><button type="button" class="btn btn-danger" id="setDate" >Past 2 weeks only</button></div>
             <div class="form-group">
                     <label for="from">From:</label>
                     <input class="form-control"  type="date" id="from" name="from" placeholder="Days" required="true"/>
             </div>
-
             <div class="form-group">
                     <label for="to">To:</label>
                     <input class="form-control"  type="date" id="to" name="to" placeholder="Days" required="true"/>
