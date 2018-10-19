@@ -10,7 +10,7 @@ function printChart() {
         cache: false,
         timeout: 600000,
         success: function(data) {
-            // console.log("successful ")
+
             var plotlyStats = [
                 {
                     x: Object.keys(data).sort().map(dateStr => dateStr.replace("-", ". ")+"."),

@@ -36,8 +36,6 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li class="active"><a href="/">Main page</a></li>
-                    <!--<li class=""><a href="/stories"></a></li>-->
-                    <!--<li class=""><a href="/bloggers">Bloggerek</a></li>-->
                 </ul>
                 <div class="navbar-text navbar-center">
                     <form sec:authorize="isAuthenticated()" id="frmlogout" th:action="@{/logout}" method="post" class="form-inline">
@@ -59,10 +57,6 @@
             <td >Codewars username:</td>
             <td th:text="${username}"></td>
         </tr>
-        <!--<tr>-->
-        <!--<td><h3>Number of completed challenges</h3></td>-->
-        <!--<td><h3 th:text="${completedChallenges}"></h3></td>-->
-        <!--</tr>-->
         <tr class="bold">
             <td>Number of completed challenges</td>
             <td align="center" th:text="${completedChallenges}"></td>
@@ -149,11 +143,7 @@
     </div>
 </div>
 <div class="col-md-2">
-    <!--<div class="">-->
-        <!--<form th:action="@{/email}" th:method="post">-->
-            <!--<input type="button" th:object="${name}" value="Email me these details"/>-->
-        <!--</form>-->
-    <!--</div>-->
+
 </div>
 
 </body>

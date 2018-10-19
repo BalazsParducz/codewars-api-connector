@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
-      xmlns:layout="http://www.w3.org/1999/xhtml">
+      xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8"/>
     <title>Log in</title>
@@ -21,7 +19,7 @@
 
 </div>
 <div class="col-md-6">
-<!--<div layout:fragment="loginContent">--><div>
+<div>
     <div><h1 align="center">Mentor</h1></div><span>
     <div align="center"><img src="codecool_symbol_flat.png" height="100" width="100"/></div></span>
     <span><h1 align="center">Aid</h1></span></div>
@@ -30,9 +28,9 @@
         <div id="err" th:if="${param.error}" class="alert alert-danger">Incorrect username</div>
         <div th:if="${param.logout}" class="alert alert-success">Log out has been successful</div>
         <label for="username" class="sr-only">Email as username</label>
-        <input type="text" id="username" name="username" class="form-control inpdemo" placeholder="Username" required="true" />
+        <input type="text" id="username" name="username" class="form-control inpdemo" placeholder="Email as username" required/>
         <label for="password" class="sr-only">Password</label>
-        <input type="password" id="password" name="password" class="form-control inpdemo" placeholder="Password" required="true" />
+        <input type="password" id="password" name="password" class="form-control inpdemo" placeholder="Password" required/>
         <div class="checkbox">
             <label> <input id="remember-me" name="remember-me" type="checkbox" />Remember me
             </label>
@@ -40,7 +38,6 @@
         <button class="btn btn-lg btn-primary btn-block" type="submit">Log in</button>
     </form>
     <a href="/registration">Registration</a>
-<!--</div>-->
 </div>
 <div class="col-md-3"></div>
 </body>
