@@ -16,14 +16,12 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="passwordCheck.js"></script>
+
 </head>
 <body>
 
 <div class="col-md-3">
-    <!--<h1 align="center">Mentor</h1><span>-->
-    <!--<div align="center"><img src="codecool_symbol_flat.png" height="100" width="100"/></div></span>-->
-    <!--<span><h1 align="center">Aid</h1></span>-->
+
 </div>
 <div class="col-md-6">
     <h1 align="center">Mentor</h1><span>
@@ -33,14 +31,30 @@
 
     <form name="registration" th:action="@{/registration}" th:object="${mentor}" method="post" class="form-signin">
         <h2 class="form-signin-heading">Please, register here</h2>
-        <input type="text" id="email" name="email" th:field="*{email}" class="form-control" placeholder="Username"  />
-        <input type="password" id="password" name="password" th:field="*{password}"  class="form-control" placeholder="Password" />
-        <input type="password" id="confirm_password" name="password" th:field="*{matchingPassword}"  class="form-control" placeholder="Confirm password" />
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Yep, do it</button>
+        <input type="text" id="email" name="email" th:field="*{email}" class="form-control inpdemo" placeholder="Username"  />
+        <input type="password" id="password" name="password" th:field="*{password}"  class="form-control inpdemo" placeholder="Password" />
+        <input type="password" id="confirm_password" name="password" th:field="*{matchingPassword}"  class="form-control inpdemo" placeholder="Confirm password" />
+        <button class="btn btn-lg btn-primary btn-block inpdemo" type="submit">Yep, do it</button>
     </form>
 
 </div>
 </div>
 <div class="col-md-3"></div>
+<script >
+    let confirm_password = document.getElementById("confirm_password");
+    let password = document.getElementById("password");
+
+    function validatePassword(){
+        if(password.value !== confirm_password.value) {
+            confirm_password.setCustomValidity("Passwords Don't Match");
+        } else {
+            confirm_password.setCustomValidity('');
+        }
+    }
+
+    password.onchange = validatePassword;
+    confirm_password.onkeyup = validatePassword;
+
+</script>
 </body>
 </html>
