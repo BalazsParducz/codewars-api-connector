@@ -3,7 +3,6 @@ package com.codewarsapi.config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -45,10 +44,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public void configureAuth(AuthenticationManagerBuilder auth) throws Exception {
             auth
                     .userDetailsService(mentorDetailsServiceImpl);
-//                .inMemoryAuthentication()
-//                    .withUser("quert@freemail.hu")
-//                    .password("a")
-//                    .roles("USER");
     }
 
 
@@ -58,8 +53,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
                     .authorizeRequests()
                         .antMatchers("/admin/**").hasRole("ADMIN")
-                        .antMatchers("/registration","/codecool_symbol_flat.png").permitAll()     // ez ellentmond a következő sornak - minent lehet
-                        .anyRequest().authenticated()                   // és mindent autentikál azon kívül
+                        .antMatchers("/registration","/codecool_symbol_flat.png", "/basic.css").permitAll()
+                        .anyRequest().authenticated()           
                         .and()
                     .formLogin()
                         .loginPage("/login").permitAll()
