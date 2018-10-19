@@ -23,11 +23,6 @@ public class MentorDetailsServiceImpl implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Mentor mentor = mentorRepo.findMentorByEmail(username);
 
-//        Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
-//        for (Role role : user.getRoles()){
-//            grantedAuthorities.add(new SimpleGrantedAuthority(role.getName()));
-//        }
-
         return new org.springframework.security.core.userdetails.User(mentor.getEmail(), mentor.getPassword(), Collections.emptyList());
     }
 }
