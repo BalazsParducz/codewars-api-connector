@@ -9,11 +9,11 @@ import java.io.IOException;
 public class ConnectionThread implements Runnable {
 
 
-    ApiService apiService;
+    private ApiService apiService;
 
     private Kata kata;
 
-    protected ConnectionThread(Kata kata, ApiService apiService) {
+    ConnectionThread(Kata kata, ApiService apiService) {
         this.kata = kata;
         this.apiService = apiService;
     }
