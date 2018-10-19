@@ -4,7 +4,7 @@ function printChart() {
     $.ajax({
         type: "GET",
         contentType: "application/json",
-        url: "http://localhost:8888/plotly/",
+        url: "http://localhost/plotly/",
         data: {codewars_username: $("#codewars_username").val(), from: $("#from").val(), to: $("#to").val()},
         dataType: 'json',
         cache: false,
