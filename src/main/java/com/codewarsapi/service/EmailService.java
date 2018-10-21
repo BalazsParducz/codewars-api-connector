@@ -1,6 +1,7 @@
 package com.codewarsapi.service;
 
 import com.codewarsapi.model.Kata;
+import jdk.nashorn.internal.ir.annotations.Ignore;
 import org.apache.juli.logging.Log;
 import org.apache.juli.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,8 +12,8 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
-
-@Service
+@Ignore
+//@Service
 public class EmailService {
 
     private final Log log = LogFactory.getLog(this.getClass());
