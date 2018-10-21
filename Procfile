@@ -1,1 +1,1 @@
-web: java $JAVA_OPTS -jar target/*.jar --p $PORT
+web: java -jar target/codewars-api-connector-1.0-SNAPSHOT.jar
