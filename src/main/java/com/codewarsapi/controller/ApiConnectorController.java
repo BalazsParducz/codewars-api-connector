@@ -46,8 +46,8 @@ public class ApiConnectorController {
     @Autowired
     private MentorValidator mentorValidator;
 
-    @Autowired
-    private EmailService emailService;
+//    @Autowired
+//    private EmailService emailService;
 
 //    @Secured("ROLE_USER")
     @GetMapping("/")
