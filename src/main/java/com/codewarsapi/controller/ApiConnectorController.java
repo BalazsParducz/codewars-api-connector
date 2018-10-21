@@ -79,7 +79,7 @@ public class ApiConnectorController {
                 model.addAttribute("points", points);
                 model.addAttribute("from", from);
                 model.addAttribute("to", to);
-                String emailText = emailService.generateEmailText(codewars_user, points, ldFrom, ldTo, katasForAGivenPeriod);
+//                String emailText = emailService.generateEmailText(codewars_user, points, ldFrom, ldTo, katasForAGivenPeriod);
 //            emailService.sendMessage(mentorService.);
         } catch (IOException ioe) {
             ioe.printStackTrace();
@@ -116,7 +116,7 @@ public class ApiConnectorController {
     public String emailResults(@ModelAttribute("name") String name, String emailText) {
         System.out.println(name);
         System.out.println(emailText);
-        emailService.sendMessage(name, emailText);
+//        emailService.sendMessage(name, emailText);
         return "index";
     }
 
