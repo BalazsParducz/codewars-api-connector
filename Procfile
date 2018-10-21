@@ -1,1 +1,1 @@
-web: java -jar target/codewars-api-connector-*.jar $PORT
+web: java -jar target/codewars-api-connector-*.jar
