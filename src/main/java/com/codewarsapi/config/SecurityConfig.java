@@ -53,7 +53,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
                     .authorizeRequests()
                         .antMatchers("/admin/**").hasRole("ADMIN")
-                        .antMatchers("/registration","/codecool_symbol_flat.png", "/basic.css").permitAll()
+                        .antMatchers("/registration","/codecool_symbol_flat.png", "/basic.css", "https://codewars-api-connector.herokuapp.com/").permitAll()
                         .anyRequest().authenticated()           
                         .and()
                     .formLogin()
