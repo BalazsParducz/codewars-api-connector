@@ -1,10 +1,12 @@
 
+const plotlyUrl = "https://codewars-api-connector-2.herokuapp.com/plotly"
+
 function printChart() {
 
     $.ajax({
         type: "GET",
         contentType: "application/json",
-        url: "http://localhost:8888/plotly/",
+        url: plotlyUrl,
         data: {codewars_username: $("#codewars_username").val(), from: $("#from").val(), to: $("#to").val()},
         dataType: 'json',
         cache: false,
