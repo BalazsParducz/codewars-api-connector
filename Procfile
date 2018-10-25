@@ -1,1 +1,1 @@
-web: java -jar target/codewars-api-connector-*.jar
+web: java -jar target/codewars-api-connector-*.jar -Dserver.port=$PORT
