@@ -27,6 +27,10 @@ function printChart() {
                     tickformat:'d'
                 }
             });
+        },
+        error : function (error) {
+            console.log("error getting data for plot " + error);
+            printChart();
         }
     });
 }
