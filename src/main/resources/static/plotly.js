@@ -1,5 +1,5 @@
 
-const plotlyUrl = "https://codewars-api-connector-2.herokuapp.com/plotly"
+const plotlyUrl = "http://localhost:8888/plotly"
 
 function printChart() {
 
@@ -29,7 +29,7 @@ function printChart() {
             });
         },
         error : function (error) {
-            console.log("error getting data for plot " + error);
+            console.log("error getting data for plotly " + error);
             printChart();
         }
     });

@@ -31,7 +31,8 @@
 
     <form name="registration" th:action="@{/registration}" th:object="${mentor}" method="post" class="form-signin">
         <h2 class="form-signin-heading">Please, register here</h2>
-        <input type="text" id="email" name="email" th:field="*{email}" class="form-control inpdemo" placeholder="Email as username"  required/>
+        <!--<input type="text" id="username" name="username" th:field="*{username}" class="form-control inpdemo" placeholder="What would you like us to call you?"  required/>-->
+        <input type="text" id="email" name="email" th:field="*{email}" class="form-control inpdemo" placeholder="Email"  required/>
         <input type="password" id="password" name="password" th:field="*{password}"  class="form-control inpdemo" placeholder="Password" required/>
         <input type="password" id="confirm_password" name="password" th:field="*{matchingPassword}"  class="form-control inpdemo" placeholder="Confirm password" required/>
         <button class="btn btn-lg btn-primary btn-block inpdemo" type="submit">Yep, do it</button>

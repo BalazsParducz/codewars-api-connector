@@ -34,14 +34,14 @@
                     </form>
                 </div>
                 <div class="navbar-text navbar-right">
-                    Welcome <span sec:authentication="name">Anonymous </span>
+                    Welcome <span sec:authentication="name">Anonymous </span>!
                 </div>
             </div>
         </div>
     </nav>
 
     <div class="cont3">
-        <form th:action="@{/getAPI}" th:object="${codewars_user}" method="post" role="form">
+        <form th:action="@{/getAPI}" th:object="${codewars_user}" method="get" role="form">
             <div class="form-group">
                     <label for="codewars_user">Provide Codewars username:</label>
                     <input class="form-control"  type="text" id="codewars_user" name="codewars_user" placeholder="Codewars username"
@@ -63,6 +63,10 @@
         </form>
     </div>
 </div>
-<div class="col-md-2"></div>
+<div class="col-md-2">
+    <div sec:authorize="hasRole('ADMIN')">
+        <a type="button" class="btn btn-default" th:href="@{/admin}">Go to admin page</a>
+    </div>
+</div>
 </body>
 </html>

@@ -16,11 +16,12 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
+<div class="col-md-2"></div>
+<div class="col-md-8">
 
-<div layout:fragment="loginContent">
+    <div align="center" th:insert="~{admin :: adminpage}"></div>
 </div>
-
-<div th:replace="plotly.html"></div>
+<div class="col-md-2"></div>
 
 </body>
 </html>

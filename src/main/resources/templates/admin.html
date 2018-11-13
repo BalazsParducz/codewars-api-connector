@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
     <meta charset="UTF-8">
     <title>CodewarsAPI Admin page</title>
@@ -14,14 +15,33 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
-<div class="col-md-2">
-
+<div class="col-md-3">
+    <div><h1 align="center">Mentor</h1>
+        <div align="center"><img src="codecool_symbol_flat.png" height="100" width="100"/></div>
+        <h1 align="center">Aid</h1>
+    </div>
 </div>
-<div class="col-md-8 cont">
+<div class="col-md-6">
 
-<div><h1 align="center">Mentor</h1>
-    <div align="center"><img src="codecool_symbol_flat.png" height="100" width="100"/></div>
-    <h1 align="center">Aid</h1></div>
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="/">Main page</a></li>
+                </ul>
+                <div class="navbar-text navbar-center">
+                    <form sec:authorize="isAuthenticated()" id="frmlogout" th:action="@{/logout}" method="post" class="form-inline">
+                        <a href="javascript:{}" onclick="document.getElementById('frmlogout').submit(); return false;">Log
+                            out</a>
+                    </form>
+                </div>
+                <div class="navbar-text navbar-right">
+                    Welcome <span sec:authentication="name">Anonymous </span>!
+                </div>
+            </div>
+        </div>
+    </nav>
+
     <div align="center">
         <h2>Admin Page</h2>
     <table>
@@ -40,6 +60,6 @@
     </table>
 </div>
 </div>
-<div class="col-md-2"></div>
+<div class="col-md-3"></div>
 </body>
 </html>
