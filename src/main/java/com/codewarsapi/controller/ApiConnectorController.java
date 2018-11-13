@@ -56,7 +56,7 @@ public class ApiConnectorController {
         return "provide_user";
     }
 
-    @PostMapping(value = "/getAPI")
+    @GetMapping(value = "/getAPI") // GET
     public String indexPage(@RequestParam("codewars_user") String codewars_user,
                             @RequestParam("from") String from,
                             @RequestParam("to") String to,
