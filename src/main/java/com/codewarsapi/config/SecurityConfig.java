@@ -2,6 +2,7 @@ package com.codewarsapi.config;
 
 import com.codewarsapi.model.Mentor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -19,7 +20,11 @@ import org.springframework.security.web.authentication.SimpleUrlAuthenticationSu
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
+    @Value("${admin.password}")
     private String password;
+
+    @Value("${admin.username}")
+    private String username;
 
     @Autowired
     private UserDetailsService mentorDetailsServiceImpl;
@@ -42,11 +47,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
-            password = bCryptPasswordEncoder().encode(System.getenv("adminpassword"));
+            String pwd = bCryptPasswordEncoder().encode(password);
 
             auth    .inMemoryAuthentication()
-                    .withUser("admin")
-                    .password(password)
+                    .withUser(username)
+                    .password(pwd)
                     .roles("ADMIN");
 
             auth    .userDetailsService(mentorDetailsServiceImpl);
