@@ -1,5 +1,6 @@
 package com.codewarsapi.config;
 
+import com.codewarsapi.model.Mentor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -18,11 +19,10 @@ import org.springframework.security.web.authentication.SimpleUrlAuthenticationSu
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
+    private String password;
 
     @Autowired
     private UserDetailsService mentorDetailsServiceImpl;
-
-
     @Bean
     public BCryptPasswordEncoder bCryptPasswordEncoder() {
         return new BCryptPasswordEncoder();
@@ -40,21 +40,29 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return super.authenticationManager();
     }
 
-    @Autowired
-    public void configureAuth(AuthenticationManagerBuilder auth) throws Exception {
-            auth
-                    .userDetailsService(mentorDetailsServiceImpl);
+    @Override
+    public void configure(AuthenticationManagerBuilder auth) throws Exception {
+            password = bCryptPasswordEncoder().encode(System.getenv("adminpassword"));
+
+            auth    .inMemoryAuthentication()
+                    .withUser("admin")
+                    .password(password)
+                    .roles("ADMIN");
+
+            auth    .userDetailsService(mentorDetailsServiceImpl);
     }
 
 
     @Override
     protected void configure(HttpSecurity httpSec) throws Exception {
+
             httpSec.csrf().disable()
+
 
                     .authorizeRequests()
                         .antMatchers("/admin/**").hasRole("ADMIN")
-                        .antMatchers("/registration","/codecool_symbol_flat.png", "/basic.css", "https://codewars-api-connector.herokuapp.com/").permitAll()
-                        .anyRequest().authenticated()           
+                        .antMatchers("/registration","/codecool_symbol_flat.png", "/basic.css").permitAll()
+                        .anyRequest().authenticated()
                         .and()
                     .formLogin()
                         .loginPage("/login").permitAll()
