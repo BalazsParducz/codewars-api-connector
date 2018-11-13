@@ -13,4 +13,6 @@ public interface MentorService {
         void save(Mentor user);
 
         Mentor findByEmail(String email);
+
+        List<Mentor> getAllMentors();
 }

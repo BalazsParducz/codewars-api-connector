@@ -1,11 +1,9 @@
 package com.codewarsapi.model;
 
-
-import org.hibernate.validator.constraints.NotEmpty;
-
 import javax.persistence.*;
 import javax.validation.constraints.AssertTrue;
 import javax.validation.constraints.NotNull;
+import java.util.Collection;
 import java.util.Set;
 
 @Entity
@@ -15,6 +13,9 @@ public class Mentor {
     @Id
     @GeneratedValue
     private Long id;
+
+    @Column( unique = true )
+    private String username;
 
     @NotNull
     @Column( unique = true )
@@ -26,16 +27,39 @@ public class Mentor {
     @Transient
     private String matchingPassword;
 
-//    @Column
-//    private Set<Role> roles;
+    @ManyToMany
+    @JoinTable(
+            name = "users_roles",
+            joinColumns = @JoinColumn(
+                    name = "user_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(
+                    name = "role_id", referencedColumnName = "id"))
+    private Collection<Role> roles;
+
+    public Collection<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Collection<Role> roles) {
+        this.roles = roles;
+    }
+
+//    public void addRole(Role role) {
+//        System.out.println(role.getName());
+//        this.roles.add(role);
+//    }
 
     public Mentor() {}
 
-    public Mentor(String email, String password) {
+    public Mentor(String username, String email, String password, Collection<Role> roles) {
         this();
+        this.username = username;
         this.email = email;
         this.password = password;
+        this.roles = roles;
     }
+
+
 
     public Long getId() {
         return id;
@@ -43,6 +67,14 @@ public class Mentor {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getEmail() {
