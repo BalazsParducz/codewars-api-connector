@@ -42,20 +42,22 @@
         </div>
     </nav>
 
-    <div align="center">
+    <div align="center" class="cont">
         <h2>Admin Page</h2>
     <table>
         <tr>
             <th>Nr</th>
-            <th>Username</th>
-            <th>Email</th>
+            <!--<th>Username</th>-->
+            <th>Username/Email</th>
             <th>Add to admins</th>
+            <th>Delete user</th>
         </tr>
         <tr th:each="mentor,iter:${mentorList}">
             <td th:text="${iter.index+1}"></td>
-            <td th:text="${mentor.getUsername()}"></td>
+            <!--<td th:text="${mentor.getUsername()}"></td>-->
             <td th:text="${mentor.getEmail()}"></td>
             <td><button class="btn btn-default" th:value="${mentor.getUsername()}">Add to admins</button></td>
+            <td><button class="btn btn-danger" th:value="${mentor.getUsername()}">Delete</button></td>
         </tr>
     </table>
 </div>
